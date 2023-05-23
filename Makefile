@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/23 16:41:38 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/23 16:48:39 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,11 @@ OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}
 # Make in Linux or MacOS system
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
+  MLX			=	mlx_macos
   MLX_LIB		=	${DIR_LIB}mlx_macos.a
   MLX_FLAGS		=	-framework OpenGL -framework AppKit
 else
+  MLX			=	mlx_linux
   MLX_LIB		=	${DIR_LIB}mlx_linux.a
   MLX_FLAGS		=	-lXext -lX11
 endif
@@ -53,7 +55,7 @@ ${DIR_OBJ}%.o:	%.c	${HEADER}
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 
 ${NAME}:		${OBJ}
-				${CC} ${FLAGS} ${OBJ} -o ${NAME} -Llib -lmlx_linux ${MLX_FLAGS}
+				${CC} ${FLAGS} ${OBJ} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS}
 clean:
 				${RM} ${OBJ} ${DIR_OBJ}
 
