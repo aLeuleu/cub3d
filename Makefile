@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/23 16:04:28 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/23 16:17:24 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,4 +61,7 @@ fclean:			clean
 
 re :			fclean all
 
-.PHONY: all clean fclean re
+check:
+				norminette ${DIR_SRC} ${DIR_HEADER}cub3d.h
+
+.PHONY: all clean fclean re check
