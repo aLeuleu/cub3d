@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/23 16:41:24 by lpupier          ###   ########.fr       */
+/*   Created: 2023/05/23 16:32:12 by lpupier           #+#    #+#             */
+/*   Updated: 2023/05/23 16:38:36 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	main(void)
+int	quit_window(t_map *map)
 {
-	t_map	map;
-
-	map.mlx = mlx_init();
-	map.mlx_win = mlx_new_window(map.mlx, 1920, 1080, "Hello world !");
-	mlx_hook(map.mlx_win, 17, 0, &quit_window, &map);
-	mlx_loop(map.mlx);
+	mlx_destroy_window(map->mlx, map->mlx_win);
+	exit(0);
 	return (0);
 }

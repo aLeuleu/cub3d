@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/23 16:17:24 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/23 16:41:38 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 # Directories
 DIR_HEADER		=	include/
@@ -27,7 +27,8 @@ HEADER			=	${DIR_HEADER}cub3d.h	\
 					${DIR_HEADER}mlx.h
 
 # Sources files
-SRC				=	${DIR_SRC}main.c
+SRC				=	${DIR_SRC}main.c		\
+					${DIR_SRC}events.c
 
 # Objects
 OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}
@@ -47,12 +48,12 @@ all:			${NAME}
 
 ${DIR_OBJ}%.o:	%.c	${HEADER}
 				@mkdir -p ${shell dirname $@}
-				${CC} ${CFLAGS} -c $< -o $@ -I ${DIR_HEADER}
+				${CC} ${FLAGS} -c $< -o $@ -I ${DIR_HEADER}
 
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 
 ${NAME}:		${OBJ}
-				${CC} ${CFLAGS} ${OBJ} -o ${NAME} -Llib -lmlx_linux ${MLX_FLAGS}
+				${CC} ${FLAGS} ${OBJ} -o ${NAME} -Llib -lmlx_linux ${MLX_FLAGS}
 clean:
 				${RM} ${OBJ} ${DIR_OBJ}
 
