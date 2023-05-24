@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/23 16:40:19 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/24 12:50:07 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 // Minilibx
 # include "mlx.h"
+
+// Libft
+# include "../libft/includes/libft.h"
 
 // Map structure
 typedef struct s_map

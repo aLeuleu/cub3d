@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/24 10:56:56 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/24 12:47:00 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,10 @@ NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
 FLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+
+# Libft support
+DIR_LIBFT		=	libft/
+LIBFT			=	${DIR_LIBFT}libft.a
 
 # Directories
 DIR_HEADER		=	include/
@@ -54,17 +58,29 @@ ${DIR_OBJ}%.o:	%.c	${HEADER}
 
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 
-${NAME}:		${OBJ}
-				${CC} ${FLAGS} ${OBJ} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS}
+${NAME}:		${LIBFT} ${OBJ}
+				${CC} ${FLAGS} ${OBJ} ${LIBFT} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS}
+
+${LIBFT}:		FORCE
+				${MAKE} -C ${DIR_LIBFT}
+
 clean:
 				${RM} ${OBJ} ${DIR_OBJ}
+				${MAKE} clean -C ${DIR_LIBFT}
 
 fclean:			clean
 				${RM} ${NAME}
+				${MAKE} fclean -C ${DIR_LIBFT}
 
 re :			fclean all
 
 check:
 				norminette ${DIR_SRC} ${DIR_HEADER}cub3d.h
 
-.PHONY: all clean fclean re check
+
+valgrind:		${NAME}
+				valgrind --leak-check=full ./${NAME}
+
+FORCE:
+
+.PHONY: all clean fclean re check valgrind FORCE
