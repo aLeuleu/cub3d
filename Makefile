@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/23 16:48:39 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/24 10:56:56 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address
 
 # Directories
 DIR_HEADER		=	include/
