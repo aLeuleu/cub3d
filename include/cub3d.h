@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/24 12:50:07 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/24 14:14:59 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,27 @@
 # include <unistd.h>
 # include <math.h>
 
-// Minilibx
+// Minilibx & libft
 # include "mlx.h"
-
-// Libft
 # include "../libft/includes/libft.h"
+
+// Display structure
+typedef struct s_display
+{
+	void	*mlx;
+	void	*mlx_win;
+}	t_display;
 
 // Map structure
 typedef struct s_map
 {
-	void	*mlx;
-	void	*mlx_win;
 }	t_map;
 
+// parsing.c
+int		parsing(int argc, char **argv);
+int		check_file_extention(char *file);
+
 // events.c
-int	quit_window(t_map *map);
+int		quit_window(t_display *display);
 
 #endif

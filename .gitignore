@@ -1,4 +1,6 @@
 .idea/
 .github/
+.vscode/
 .obj/
 cub3d
+*.cub

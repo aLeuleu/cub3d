@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/24 12:47:00 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/24 13:27:24 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,20 @@ DIR_SRC			=	src/
 DIR_LIB			=	lib/
 DIR_OBJ			=	.obj/
 
+# Subdirectories
+DIR_PARSING		=	${DIR_SRC}parsing/
+
 # Headers files
 HEADER			=	${DIR_HEADER}cub3d.h	\
 					${DIR_HEADER}mlx.h
 
+# Parsing files
+SRC_PARSING		=	${DIR_PARSING}parsing.c
+
 # Sources files
-SRC				=	${DIR_SRC}main.c		\
-					${DIR_SRC}events.c
+SRC				=	${DIR_SRC}main.c	\
+					${DIR_SRC}events.c	\
+					${SRC_PARSING}
 
 # Objects
 OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}
