@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:04:48 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/24 14:21:22 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/24 14:23:43 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	parsing(int argc, char **argv)
 		printf("Error\n -The expected map format is '.cub'\n");
 		return (EXIT_FAILURE);
 	}
-	
 	return (EXIT_SUCCESS);
 }
 
