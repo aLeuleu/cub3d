@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/24 13:27:24 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/24 17:28:34 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 # Libft support
 DIR_LIBFT		=	libft/
@@ -34,11 +34,15 @@ HEADER			=	${DIR_HEADER}cub3d.h	\
 					${DIR_HEADER}mlx.h
 
 # Parsing files
-SRC_PARSING		=	${DIR_PARSING}parsing.c
+SRC_PARSING		=	${DIR_PARSING}parsing.c					\
+					${DIR_PARSING}check_file_extention.c	\
+					${DIR_PARSING}get_textures_colors.c		\
+					${DIR_PARSING}get_map.c
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\
 					${DIR_SRC}events.c	\
+					${DIR_SRC}errors.c	\
 					${SRC_PARSING}
 
 # Objects

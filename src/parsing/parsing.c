@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:04:48 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/24 14:23:43 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/24 17:27:26 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,26 @@
 int	parsing(int argc, char **argv)
 {
 	char	*file;
+	int		fd;
+	t_map	map;
 
 	if (argc != 2)
 	{
-		printf("Error\n -Please give the path of a map\n");
+		error("Please give the path of a map");
 		return (EXIT_FAILURE);
 	}
 	file = argv[1];
 	if (check_file_extention(file) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 	{
-		printf("Error\n -The expected map format is '.cub'\n");
+		error("The file does not exist or cannot be opened");
 		return (EXIT_FAILURE);
 	}
+	if (get_textures_colors(fd, &map) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (get_map(fd, &map) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
-}
-
-int	check_file_extention(char *file)
-{
-	char	**file_tab;
-	int		len;
-
-	file_tab = ft_split(file, '.');
-	len = ft_len_tab(file_tab);
-	if (len < 2)
-		return (ft_free_tab(file_tab), EXIT_FAILURE);
-	if (!ft_strcmp(file_tab[len - 1], "cub"))
-		return (ft_free_tab(file_tab), EXIT_SUCCESS);
-	return (ft_free_tab(file_tab), EXIT_FAILURE);
 }
