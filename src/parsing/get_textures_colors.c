@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:43:35 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/24 17:23:23 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/25 13:25:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	get_textures_colors(int fd, t_map *map)
 	idx = 0;
 	while (1)
 	{
+		if (map->nb_parameter_set == 6)
+			break ;
 		idx++;
 		line = get_next_line(fd);
 		if (!line)
@@ -40,7 +42,7 @@ int	get_textures_colors(int fd, t_map *map)
 		}
 		line_tab = ft_split(line, ' ');
 		free(line);
-		if (is_texture_color(line_tab, idx, map) == EXIT_FAILURE)
+		if (is_texture_color(line_tab, map) == EXIT_FAILURE)
 			return (bad_format_line(idx), ft_free_tab(line_tab), EXIT_FAILURE);
 		ft_free_tab(line_tab);
 	}
@@ -74,34 +76,30 @@ int	is_str_empty(char *line)
  * @param line_tab Array of string representing a line
  * of the map separated by its spaces.
  * @param map Overall structure of the map (see include/cub3d.h)
- * @param idx Line index in map file
  * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int	is_texture_color(char **line_tab, int idx, t_map *map)
+int	is_texture_color(char **line_tab, t_map *map)
 {
-	static int	nb_parameter_set = 0;
-
-	(void)idx;
-	if (ft_len_tab(line_tab) != 2 && nb_parameter_set < 6)
+	if (ft_len_tab(line_tab) != 2 && map->nb_parameter_set < 6)
 		return (EXIT_FAILURE);
 	if (!ft_strcmp(line_tab[0], "NO"))
-		map->path_texture_no = line_tab[1];
+		map->path_texture_no = ft_strdup(line_tab[1]);
 	else if (!ft_strcmp(line_tab[0], "SO"))
-		map->path_texture_so = line_tab[1];
+		map->path_texture_so = ft_strdup(line_tab[1]);
 	else if (!ft_strcmp(line_tab[0], "WE"))
-		map->path_texture_we = line_tab[1];
+		map->path_texture_we = ft_strdup(line_tab[1]);
 	else if (!ft_strcmp(line_tab[0], "EA"))
-		map->path_texture_ea = line_tab[1];
+		map->path_texture_ea = ft_strdup(line_tab[1]);
 	else if (!ft_strcmp(line_tab[0], "F"))
-		map->color_f = line_tab[1];
+		map->color_f = ft_strdup(line_tab[1]);
 	else if (!ft_strcmp(line_tab[0], "C"))
-		map->color_c = line_tab[1];
+		map->color_c = ft_strdup(line_tab[1]);
 	else
 	{
-		if (nb_parameter_set == 6)
+		if (map->nb_parameter_set == 6)
 			return (EXIT_SUCCESS);
 		return (EXIT_FAILURE);
 	}
-	nb_parameter_set++;
+	map->nb_parameter_set++;
 	return (EXIT_SUCCESS);
 }
