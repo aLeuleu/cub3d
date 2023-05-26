@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/25 13:55:47 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:28:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@
  * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
  */
 int	main(int argc, char **argv)
-{
+{	
 	t_display	display;
 
-	if (parsing(argc, argv) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
 	display.mlx = mlx_init();
+	if (init_map_struct(&display) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (parsing(argc, argv, &display) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (load_textures(&display) == EXIT_FAILURE)
+	{
+		error("An error occurred while loading a texture");
+		return (EXIT_FAILURE);
+	}
 	display.mlx_win = mlx_new_window(display.mlx, 1920, 1080, "Cub3D - 42");
 	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);
 	mlx_loop(display.mlx);

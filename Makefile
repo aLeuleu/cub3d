@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/25 12:41:23 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/26 16:06:29 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ DIR_OBJ			=	.obj/
 # Subdirectories
 DIR_PARSING		=	${DIR_SRC}parsing/
 DIR_UTILS		=	${DIR_SRC}utils/
+DIR_DISPLAY		=	${DIR_SRC}display/
 
 # Headers files
 HEADER			=	${DIR_HEADER}cub3d.h	\
@@ -42,13 +43,17 @@ SRC_PARSING		=	${DIR_PARSING}parsing.c					\
 
 # Utils files
 SRC_UTILS		=	${DIR_UTILS}errors.c	\
-					${DIR_UTILS}lst_utils.c
+					${DIR_UTILS}init.c
+
+# Utils files
+SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\
 					${DIR_SRC}events.c	\
 					${SRC_PARSING}		\
-					${SRC_UTILS}
+					${SRC_UTILS}		\
+					${SRC_DISPLAY}
 
 # Objects
 OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}

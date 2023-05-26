@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:32:12 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/25 11:22:21 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:23:49 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	quit_window(t_display *display)
 	mlx_destroy_window(display->mlx, display->mlx_win);
 	mlx_destroy_display(display->mlx);
 	free(display->mlx);
+	free(display->map);
 	exit(0);
 	return (0);
 }

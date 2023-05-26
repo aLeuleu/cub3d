@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:04:48 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/25 13:54:36 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:25:24 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
  * 
  * @param argc Number of parameters passed to the execution of the program.
  * @param argv Arguments passed to the execution of the program.
+ * @param display General structure for screen display (see include/cub3d.h)
  * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int	parsing(int argc, char **argv)
+int	parsing(int argc, char **argv, t_display *display)
 {
 	char	*file;
 	int		fd;
-	t_map	map;
 
 	if (argc != 2)
 	{
@@ -40,9 +40,9 @@ int	parsing(int argc, char **argv)
 		error("The file does not exist or cannot be opened");
 		return (EXIT_FAILURE);
 	}
-	if (get_textures_colors(fd, &map) == EXIT_FAILURE)
+	if (get_textures_colors(fd, display->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (get_map(fd, &map) == EXIT_FAILURE)
+	if (get_map(fd, display->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

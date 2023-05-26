@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/25 13:52:08 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/26 14:54:01 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	get_map(int fd, t_map *map)
 	int		idx;
 	char	*line;
 
-	map->map = NULL;
 	idx = 0;
 	while (1)
 	{
