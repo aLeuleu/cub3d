@@ -47,7 +47,9 @@ SRC_UTILS		=	${DIR_UTILS}errors.c		\
 					${DIR_UTILS}free_memory.c
 
 # Utils files
-SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c
+SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
+					${DIR_DISPLAY}draw_tools/mlx_draw_square.c \
+					${DIR_DISPLAY}minimap/display_minimap.c \
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\

@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 14:22:44 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/26 15:28:23 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,11 @@ int		load_xpm_file(t_display *display, char *path, void *img);
 
 // free_memory.c
 void	free_map(t_map *map);
+
+// display_minimap.c
+void	display_minimap(t_display *display);
+
+//draw_tools.c
+void	mlx_draw_square(t_display *display, int x, int y, int pos[2], int color);
 
 #endif

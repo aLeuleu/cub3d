@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 /**
  * @brief Main function of the program calling the execution
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 	}
 	display.mlx_win = mlx_new_window(display.mlx, 1920, 1080, "Cub3D - 42");
 	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);
+	display_minimap(&display);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);
 }

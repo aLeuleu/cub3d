@@ -44,21 +44,5 @@ int	parsing(int argc, char **argv, t_display *display)
 		return (EXIT_FAILURE);
 	if (get_map(fd, display->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
-	int line;
-	int column;
-	line = 0;
-	while (display->map->map[line])
-	{
-		column = 0;
-		while (display->map->map[line][column])
-		{
-			printf("[%c]", display->map->map[line][column]);
-			column++;
-		}
-		printf("\n");
-		line++;
-	}
-	
 	return (EXIT_SUCCESS);
 }
