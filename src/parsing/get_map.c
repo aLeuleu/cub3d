@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:24:36 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 17:56:37 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	get_map(int fd, t_map *map)
 		if (fill_temp_map(line, &temp_map) == EXIT_FAILURE)
 		{
 			error("The game map is incorrectly formatted");
+			ft_lstclear((t_list **)&temp_map, free);
 			return (free(line), EXIT_FAILURE);
 		}
 		free(line);

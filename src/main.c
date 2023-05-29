@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 16:30:55 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 17:52:27 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ int	main(int argc, char **argv)
 	init_display_struct(&display);
 	init_map_struct(&display);
 	if (parsing(argc, argv, &display) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (quit_window(&display), EXIT_FAILURE);
 	if (load_textures(display.mlx, &display.map) == EXIT_FAILURE)
 	{
 		error("An error occurred while loading a texture");
-		return (EXIT_FAILURE);
+		return (quit_window(&display), EXIT_FAILURE);
 	}
+	display.mlx_win = mlx_new_window(display.mlx, 1920, 1080, "Cub3D - 42");
 	display_minimap(&display);
 	mlx_put_image_to_window(\
 		display.mlx, display.mlx_win, display.img.img, 0, 0);

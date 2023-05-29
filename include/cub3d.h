@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:26:48 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 17:59:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,6 @@ int		find_big_line(t_list_char *temp_map);
 // events.c
 int		quit_window(t_display *display);
 
-// utils.c
-void	free_memory(t_map *map);
-
 // errors.c
 void	error(char *str);
 void	bad_format_line(int idx);
@@ -107,6 +104,7 @@ int	load_xpm_file(void *mlx, char *path, void **img);
 
 // free_memory.c
 void	free_map(t_map *map);
+void	free_images(t_display *display);
 
 // display_minimap.c
 void	display_minimap(t_display *display);
