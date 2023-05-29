@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/26 15:28:23 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 14:43:33 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_map
 	char		*color_f;
 	char		*color_c;
 	int			**map;
+	int			height;
+	int			width;
 }	t_map;
 
 // Display structure

@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 14:27:39 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 14:41:59 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	get_map(int fd, t_map *map)
 		free(line);
 	}
 	fill_map(map, temp_map);
+	ft_lstclear((t_list **)&temp_map, free);
 	return (EXIT_SUCCESS);
 }
 
@@ -90,19 +91,18 @@ int	fill_map(t_map *map, t_list_char *temp_map)
 {
 	t_list_char	*temp;
 	int			len;
-	int			len_max_line;
 	int			idx;
 
-	len = ft_lstsize((t_list *)temp_map);
-	len_max_line = find_big_line(temp_map);
-	map->map = malloc(sizeof(char **) * (len + 1));
+	map->height = ft_lstsize((t_list *)temp_map);
+	map->width = find_big_line(temp_map);
+	map->map = malloc(sizeof(char **) * (map->height + 1));
 	if (!map->map)
 		return (EXIT_FAILURE);
 	temp = temp_map;
 	len = 0;
 	while (temp)
 	{
-		map->map[len] = malloc(sizeof(char *) * (len_max_line + 1));
+		map->map[len] = malloc(sizeof(char *) * (map->width + 1));
 		if (!map->map[len])
 			return (EXIT_FAILURE);
 		idx = 0;
@@ -113,7 +113,7 @@ int	fill_map(t_map *map, t_list_char *temp_map)
 			map->map[len][idx] = temp->content[idx];
 			idx++;
 		}
-		while (idx < len_max_line)
+		while (idx < map->width)
 			map->map[len][idx++] = ' ';
 		map->map[len][idx] = '\0';
 		len++;
