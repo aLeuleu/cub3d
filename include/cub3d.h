@@ -33,6 +33,12 @@
 #  define OS_DARWIN 0
 # endif
 
+typedef struct s_p {
+	int		x;
+	int		y;
+	int		color;
+}				t_p;
+
 // Data image structure
 typedef struct s_data {
 	void	*img;
@@ -61,13 +67,27 @@ typedef struct s_map
 	int			width;
 }	t_map;
 
+// Player structure
+typedef struct s_player
+{
+	int 	pos_x;
+	int 	pos_y;
+	double 	orientation;
+	int 	speed;
+	int 	score;
+	int 	life;
+	int 	max_life;
+	int 	score_to_win;
+}	t_player;
+
 // Display structure
 typedef struct s_display
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	t_map	map;
+	void		*mlx;
+	void		*mlx_win;
+	t_data		img;
+	t_map		map;
+	t_player	player;
 }	t_display;
 
 // init.c
@@ -82,6 +102,9 @@ int		check_file_extention(char *file);
 
 // get_textures_colors.c
 int		get_textures_colors(int fd, t_map *map);
+
+// get_player_position.c
+void	get_player_position(t_player *player, t_map *map);
 
 // get_map.c
 int		get_map(int fd, t_map *map);
@@ -108,7 +131,9 @@ void	display_minimap(t_display *display);
 
 //draw_tools
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	mlx_draw_square(\
-			t_display *display, int x, int y, int pos[2], int color);
+void	mlx_draw_square(t_display *display, int side_len, int pos[2], int color);
+void	mlx_draw_circle(t_display *display, int side_len, int pos[2], int color);
+void	mlx_draw_circle_oriented(t_display *display, int radius, double angle, int color, int pos[2]);
+void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
 
 #endif

@@ -44,6 +44,7 @@ int	parsing(int argc, char **argv, t_display *display)
 		return (EXIT_FAILURE);
 	if (get_map(fd, &display->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	get_player_position(&display->player, &display->map);
 	close(fd);
 	return (EXIT_SUCCESS);
 }

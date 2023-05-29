@@ -1,9 +1,9 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_draw_square.c                                  :+:      :+:    :+:   */
+/*   mlx_draw_circle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
 /*   Updated: 2023/05/29 15:37:25 by lpupier          ###   ########.fr       */
@@ -12,20 +12,25 @@
 
 #include "cub3d.h"
 
-void mlx_draw_square(t_display *display, int side_len, int pos[2], int color)
+void	mlx_draw_line(t_display *display, t_p a, t_p b, int color)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		steps;
+	float	x;
+	float	y;
+	t_p		to_draw;
 
+	steps = ft_max(abs(b.x - a.x), abs(b.y - a.y));
+	x = a.x;
+	y = a.y;
 	i = 0;
-	while (i < side_len)
+	while (i <= steps)
 	{
-		j = 0;
-		while (j < side_len)
-		{
-			my_mlx_pixel_put(&display->img, j + pos[0], i + pos[1], color);
-			j++;
-		}
+		to_draw.x = round(x);
+		to_draw.y = round(y);
+		my_mlx_pixel_put(&display->img, to_draw.x, to_draw.y, color);
+		x += (b.x - a.x) / (float)steps;
+		y += (b.y - a.y) / (float)steps;
 		i++;
 	}
 }

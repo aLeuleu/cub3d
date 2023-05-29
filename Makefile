@@ -39,7 +39,8 @@ HEADER			=	${DIR_HEADER}cub3d.h	\
 SRC_PARSING		=	${DIR_PARSING}parsing.c					\
 					${DIR_PARSING}check_file_extention.c	\
 					${DIR_PARSING}get_textures_colors.c		\
-					${DIR_PARSING}get_map.c
+					${DIR_PARSING}get_map.c					\
+					${DIR_PARSING}get_player_position.c		\
 
 # Utils files
 SRC_UTILS		=	${DIR_UTILS}errors.c		\
@@ -50,7 +51,9 @@ SRC_UTILS		=	${DIR_UTILS}errors.c		\
 SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
 					${DIR_DISPLAY}render_frames.c \
 					${DIR_DISPLAY}draw_tools/mlx_draw_square.c \
+					${DIR_DISPLAY}draw_tools/mlx_draw_circle.c \
 					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c \
+					${DIR_DISPLAY}draw_tools/mlx_draw_line.c \
 					${DIR_DISPLAY}minimap/display_minimap.c \
 
 # Sources files
