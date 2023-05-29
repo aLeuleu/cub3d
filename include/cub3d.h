@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 14:43:33 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 15:53:08 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@
 #  define OS_DARWIN 0
 # endif
 
+// Data image structure
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
 // Map structure
 typedef struct s_map
 {
@@ -57,10 +66,12 @@ typedef struct s_display
 {
 	void	*mlx;
 	void	*mlx_win;
+	t_data	img;
 	t_map	*map;
 }	t_display;
 
 // init.c
+int		init_display_struct(t_display *display);
 int		init_map_struct(t_display *display);
 
 // parsing.c
@@ -100,7 +111,9 @@ void	free_map(t_map *map);
 // display_minimap.c
 void	display_minimap(t_display *display);
 
-//draw_tools.c
-void	mlx_draw_square(t_display *display, int x, int y, int pos[2], int color);
+//draw_tools
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	mlx_draw_square(\
+			t_display *display, int x, int y, int pos[2], int color);
 
 #endif

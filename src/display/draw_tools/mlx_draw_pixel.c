@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_minimap.c                                  :+:      :+:    :+:   */
+/*   mlx_draw_pixel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 15:30:29 by alevra            #+#    #+#             */
-/*   Updated: 2023/05/29 15:46:18 by lpupier          ###   ########.fr       */
+/*   Created: 2023/05/29 15:03:53 by lpupier           #+#    #+#             */
+/*   Updated: 2023/05/29 15:43:43 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	display_minimap(t_display *display)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	int	line;
-	int	column;
-	int pos[2] = {0, 0};
+	char	*dst;
 
-	line = 0;
-	while (line < display->map->height)
-	{
-		column = 0;
-		while (column < display->map->width)
-		{
-			pos[0] = column * 30;
-			pos[1] = line * 30;
-			if (display->map->map[line][column] == '1')
-				mlx_draw_square(display, 30, 30, pos, 0xFFFFFF);
-			column++;
-		}
-		line++;
-	}
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }

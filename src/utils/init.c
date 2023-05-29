@@ -6,16 +6,35 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 14:19:32 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 15:52:34 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
 /**
+ * @brief Initialization function for member variables of the display structure.
+ * 
+ * @param display General structure for screen display (see include/cub3d.h)
+ * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int	init_display_struct(t_display *display)
+{
+	display->mlx = mlx_init();
+	display->img.img = mlx_new_image(display->mlx, 1920, 1080);
+	display->img.addr = mlx_get_data_addr(\
+		display->img.img, \
+		&display->img.bits_per_pixel, \
+		&display->img.line_length, \
+		&display->img.endian);
+	display->mlx_win = mlx_new_window(display->mlx, 1920, 1080, "Cub3D - 42");
+	return (EXIT_SUCCESS);
+}
+
+/**
  * @brief Initialization function for member variables of the map structure.
  * 
- * @param map Overall structure of the map (see include/cub3d.h)
+ * @param display General structure for screen display (see include/cub3d.h)
  * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
  */
 int	init_map_struct(t_display *display)

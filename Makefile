@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/29 14:39:26 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/29 15:10:43 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 # Libft support
 DIR_LIBFT		=	libft/
@@ -49,6 +49,7 @@ SRC_UTILS		=	${DIR_UTILS}errors.c		\
 # Utils files
 SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
 					${DIR_DISPLAY}draw_tools/mlx_draw_square.c \
+					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c \
 					${DIR_DISPLAY}minimap/display_minimap.c \
 
 # Sources files
