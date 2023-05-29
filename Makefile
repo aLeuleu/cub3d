@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/29 15:10:43 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/29 16:01:37 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address
 
 # Libft support
 DIR_LIBFT		=	libft/

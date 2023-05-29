@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 15:53:08 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 16:31:44 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_display
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-	t_map	*map;
+	t_map	map;
 }	t_display;
 
 // init.c
@@ -102,8 +102,8 @@ void	error(char *str);
 void	bad_format_line(int idx);
 
 // load_textures.c
-int		load_textures(t_display *display);
-int		load_xpm_file(t_display *display, char *path, void *img);
+int		load_textures(void *mlx, t_map *map);
+int		load_xpm_file(void *mlx, char *path, void *img);
 
 // free_memory.c
 void	free_map(t_map *map);
