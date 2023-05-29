@@ -24,6 +24,15 @@
 # include "mlx.h"
 # include "../libft/includes/libft.h"
 
+// OS
+# ifndef OS_LINUX
+# define OS_LINUX 0
+# endif
+
+# ifndef OS_DARWIN
+# define OS_DARWIN 0
+# endif
+
 // Map structure
 typedef struct s_map
 {

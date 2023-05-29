@@ -15,7 +15,8 @@
 int	quit_window(t_display *display)
 {
 	mlx_destroy_window(display->mlx, display->mlx_win);
-	mlx_destroy_display(display->mlx);
+	if (OS_LINUX)
+		mlx_destroy_display(display->mlx);
 	free(display->mlx);
 	free(display->map);
 	exit(0);

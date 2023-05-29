@@ -64,10 +64,12 @@ ifeq ($(OS),Darwin)
   MLX			=	mlx_macos
   MLX_LIB		=	${DIR_LIB}mlx_macos.a
   MLX_FLAGS		=	-framework OpenGL -framework AppKit
+  DEFINE_OS		=	-D OS_DARWIN=1
 else
   MLX			=	mlx_linux
   MLX_LIB		=	${DIR_LIB}mlx_linux.a
   MLX_FLAGS		=	-lXext -lX11
+  DEFINE_OS		=	-D OS_LINUX=1
 endif
 
 # Rules
@@ -80,7 +82,7 @@ ${DIR_OBJ}%.o:	%.c	${HEADER}
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 
 ${NAME}:		${LIBFT} ${OBJ}
-				${CC} ${FLAGS} ${OBJ} ${LIBFT} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS}
+				${CC} ${FLAGS} ${OBJ} ${LIBFT} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS} ${DEFINE_OS}
 
 ${LIBFT}:		FORCE
 				${MAKE} -C ${DIR_LIBFT}
