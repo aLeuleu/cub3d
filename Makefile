@@ -64,14 +64,19 @@ OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}
 
 # Make in Linux or MacOS system
 OS := $(shell uname)
+ARCH := $(shell uname -m)
 ifeq ($(OS),Darwin)
   MLX			=	mlx_macos
-  MLX_LIB		=	${DIR_LIB}mlx_macos.a
+  MLX_LIB		=	${DIR_LIB}${MLX}.a
   MLX_FLAGS		=	-framework OpenGL -framework AppKit
   DEFINE_OS		=	-D OS_DARWIN=1
 else
-  MLX			=	mlx_linux
-  MLX_LIB		=	${DIR_LIB}mlx_linux.a
+  ifeq ($(ARCH),x86_64)
+  	MLX			=	mlx_linux
+  else
+  	MLX			=	mlx_linux_arm
+  endif
+  MLX_LIB		=	${DIR_LIB}${MLX}.a
   MLX_FLAGS		=	-lXext -lX11
   DEFINE_OS		=	-D OS_LINUX=1
 endif
@@ -81,7 +86,7 @@ all:			${NAME}
 
 ${DIR_OBJ}%.o:	%.c	${HEADER}
 				@mkdir -p ${shell dirname $@}
-				${CC} ${FLAGS} -c $< -o $@ -I ${DIR_HEADER}
+				${CC} ${FLAGS} -c $< -o $@ -I ${DIR_HEADER} ${DEFINE_OS}
 
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 
