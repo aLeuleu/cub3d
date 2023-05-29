@@ -19,16 +19,15 @@ void	display_minimap(t_display *display)
 	int pos[2] = {0, 0};
 
 	line = 0;
-//	while (line < display->map->height)
-	while (line < 100)
+	while (line < display->map->height)
 	{
 		column = 0;
-		while (column < 100)
+		while (column < display->map->width)
 		{
-			pos[0] = column * 10;
-			pos[1] = line * 10;
-			if (line % 2 == 0 && column % 2 == 0)
-				mlx_draw_square(display->mlx, 10, 10, pos, 0xFFFFFF);
+			pos[0] = column * 30;
+			pos[1] = line * 30;
+			if (display->map->map[line][column] == '1')
+				mlx_draw_square(display->mlx, 30, 30, pos, 0xFFFFFF);
 			column++;
 		}
 		line++;
