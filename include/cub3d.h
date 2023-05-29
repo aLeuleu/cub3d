@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:59:29 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 18:26:10 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,9 @@ int		check_file_extention(char *file);
 
 // get_textures_colors.c
 int		get_textures_colors(int fd, t_map *map);
-int		is_str_empty(char *line);
-int		is_texture_color(char **line_tab, t_map *map);
 
 // get_map.c
 int		get_map(int fd, t_map *map);
-int		fill_temp_map(char *line, t_list_char **temp_map);
-int		fill_map(t_map *map, t_list_char *temp_map);
-int		find_big_line(t_list_char *temp_map);
 
 // events.c
 int		quit_window(t_display *display);
@@ -100,7 +95,9 @@ void	bad_format_line(int idx);
 
 // load_textures.c
 int		load_textures(void *mlx, t_map *map);
-int	load_xpm_file(void *mlx, char *path, void **img);
+
+// render_frames.c
+int		render_frames(t_display *display);
 
 // free_memory.c
 void	free_map(t_map *map);

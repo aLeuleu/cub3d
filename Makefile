@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/29 17:48:39 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/29 18:25:42 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC_UTILS		=	${DIR_UTILS}errors.c		\
 
 # Utils files
 SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
+					${DIR_DISPLAY}render_frames.c \
 					${DIR_DISPLAY}draw_tools/mlx_draw_square.c \
 					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c \
 					${DIR_DISPLAY}minimap/display_minimap.c \

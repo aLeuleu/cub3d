@@ -6,11 +6,32 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:16:23 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 18:22:11 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+static int	load_xpm_file(void *mlx, char *path, void **img)
+{
+	char	*new_path;
+	int		img_width;
+	int		img_height;
+
+	if (path[ft_strlen(path) - 1] == '\n')
+		new_path = ft_substr(path, 0, ft_strlen(path) - 1);
+	else
+		new_path = ft_strdup(path);
+	*(img) = mlx_xpm_file_to_image(\
+		mlx, \
+		new_path, \
+		&img_width, \
+		&img_height);
+	free(new_path);
+	if (!img)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
 /**
  * @brief Function used to load all the textures of the game
@@ -42,35 +63,5 @@ int	load_textures(void *mlx, t_map *map)
 		mlx_destroy_image(mlx, map->texture_we);
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
-}
-
-/**
- * @brief Function to load an .xml file into an image
- * capable of being displayed on the screen.
- * 
- * @param mlx 
- * @param path Path to desired texture
- * @param img Pointer to the memory space capable of hosting the loaded image
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
-int	load_xpm_file(void *mlx, char *path, void **img)
-{
-	char	*new_path;
-	int		img_width;
-	int		img_height;
-
-	if (path[ft_strlen(path) - 1] == '\n')
-		new_path = ft_substr(path, 0, ft_strlen(path) - 1);
-	else
-		new_path = ft_strdup(path);
-	*(img) = mlx_xpm_file_to_image(\
-		mlx, \
-		new_path, \
-		&img_width, \
-		&img_height);
-	free(new_path);
-	if (!img)
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

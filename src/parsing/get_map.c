@@ -6,56 +6,33 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:56:37 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 18:21:33 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-/**
- * @brief The purpose of the function is to retrieve the floor, walls,
- * player position of the map.
- * 
- * @param fd The file descriptor of the file being read.
- * @param map Overall structure of the map (see include/cub3d.h)
- * 
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
-int	get_map(int fd, t_map *map)
+static int	find_big_line(t_list_char *temp_map)
 {
-	int			idx;
-	char		*line;
-	t_list_char	*temp_map;
+	t_list_char	*temp;
+	int			len;
+	int			temp_len;
 
-	temp_map = NULL;
-	idx = 0;
-	while (1)
+	temp = temp_map;
+	len = 0;
+	while (temp)
 	{
-		idx++;
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (fill_temp_map(line, &temp_map) == EXIT_FAILURE)
-		{
-			error("The game map is incorrectly formatted");
-			ft_lstclear((t_list **)&temp_map, free);
-			return (free(line), EXIT_FAILURE);
-		}
-		free(line);
+		temp_len = ft_strlen(temp->content);
+		if (temp->content[temp_len - 1] == '\n')
+			temp_len--;
+		if (temp_len > len)
+			len = temp_len;
+		temp = temp->next;
 	}
-	fill_map(map, temp_map);
-	ft_lstclear((t_list **)&temp_map, free);
-	return (EXIT_SUCCESS);
+	return (len);
 }
 
-/**
- * @brief Function to fill the linked list representing the game map.
- * 
- * @param line Character string representing a line of the map file
- * @param temp_map 
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
-int	fill_temp_map(char *line, t_list_char **temp_map)
+static int	fill_temp_map(char *line, t_list_char **temp_map)
 {
 	t_list_char	*new;
 	int			idx;
@@ -81,14 +58,7 @@ int	fill_temp_map(char *line, t_list_char **temp_map)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief 
- * 
- * @param map Overall structure of the map (see include/cub3d.h)
- * @param temp_map 
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
-int	fill_map(t_map *map, t_list_char *temp_map)
+static int	fill_map(t_map *map, t_list_char *temp_map)
 {
 	t_list_char	*temp;
 	int			len;
@@ -124,22 +94,38 @@ int	fill_map(t_map *map, t_list_char *temp_map)
 	return (EXIT_SUCCESS);
 }
 
-int	find_big_line(t_list_char *temp_map)
+/**
+ * @brief The purpose of the function is to retrieve the floor, walls,
+ * player position of the map.
+ * 
+ * @param fd The file descriptor of the file being read.
+ * @param map Overall structure of the map (see include/cub3d.h)
+ * 
+ * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
+ */
+int	get_map(int fd, t_map *map)
 {
-	t_list_char	*temp;
-	int			len;
-	int			temp_len;
+	int			idx;
+	char		*line;
+	t_list_char	*temp_map;
 
-	temp = temp_map;
-	len = 0;
-	while (temp)
+	temp_map = NULL;
+	idx = 0;
+	while (1)
 	{
-		temp_len = ft_strlen(temp->content);
-		if (temp->content[temp_len - 1] == '\n')
-			temp_len--;
-		if (temp_len > len)
-			len = temp_len;
-		temp = temp->next;
+		idx++;
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		if (fill_temp_map(line, &temp_map) == EXIT_FAILURE)
+		{
+			error("The game map is incorrectly formatted");
+			ft_lstclear((t_list **)&temp_map, free);
+			return (free(line), EXIT_FAILURE);
+		}
+		free(line);
 	}
-	return (len);
+	fill_map(map, temp_map);
+	ft_lstclear((t_list **)&temp_map, free);
+	return (EXIT_SUCCESS);
 }

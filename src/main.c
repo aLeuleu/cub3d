@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:52:27 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 18:29:09 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ int	main(int argc, char **argv)
 		return (quit_window(&display), EXIT_FAILURE);
 	}
 	display.mlx_win = mlx_new_window(display.mlx, 1920, 1080, "Cub3D - 42");
-	display_minimap(&display);
-	mlx_put_image_to_window(\
-		display.mlx, display.mlx_win, display.img.img, 0, 0);
 	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);
+	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);
 }
