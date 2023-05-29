@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 16:31:35 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 17:16:23 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@
  */
 int	load_textures(void *mlx, t_map *map)
 {
-	if (load_xpm_file(mlx, map->path_texture_no, map->texture_no))
+	if (load_xpm_file(mlx, map->path_texture_no, &map->texture_no))
 		return (EXIT_FAILURE);
-	if (load_xpm_file(mlx, map->path_texture_so, map->texture_so))
+	if (load_xpm_file(mlx, map->path_texture_so, &map->texture_so))
 	{
 		mlx_destroy_image(mlx, map->texture_no);
 		return (EXIT_FAILURE);
 	}
-	if (load_xpm_file(mlx, map->path_texture_we, map->texture_we))
+	if (load_xpm_file(mlx, map->path_texture_we, &map->texture_we))
 	{
 		mlx_destroy_image(mlx, map->texture_no);
 		mlx_destroy_image(mlx, map->texture_so);
 		return (EXIT_FAILURE);
 	}
-	if (load_xpm_file(mlx, map->path_texture_ea, map->texture_ea))
+	if (load_xpm_file(mlx, map->path_texture_ea, &map->texture_ea))
 	{
 		mlx_destroy_image(mlx, map->texture_no);
 		mlx_destroy_image(mlx, map->texture_so);
@@ -54,7 +54,7 @@ int	load_textures(void *mlx, t_map *map)
  * @param img Pointer to the memory space capable of hosting the loaded image
  * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int	load_xpm_file(void *mlx, char *path, void *img)
+int	load_xpm_file(void *mlx, char *path, void **img)
 {
 	char	*new_path;
 	int		img_width;
@@ -64,7 +64,7 @@ int	load_xpm_file(void *mlx, char *path, void *img)
 		new_path = ft_substr(path, 0, ft_strlen(path) - 1);
 	else
 		new_path = ft_strdup(path);
-	img = mlx_xpm_file_to_image(\
+	*(img) = mlx_xpm_file_to_image(\
 		mlx, \
 		new_path, \
 		&img_width, \

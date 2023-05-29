@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 16:31:44 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 17:26:48 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_map
 	void		*texture_ea;
 	char		*color_f;
 	char		*color_c;
-	int			**map;
+	char		**map;
 	int			height;
 	int			width;
 }	t_map;
@@ -103,7 +103,7 @@ void	bad_format_line(int idx);
 
 // load_textures.c
 int		load_textures(void *mlx, t_map *map);
-int		load_xpm_file(void *mlx, char *path, void *img);
+int	load_xpm_file(void *mlx, char *path, void **img);
 
 // free_memory.c
 void	free_map(t_map *map);
