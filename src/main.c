@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 18:29:09 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 18:57:28 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	main(int argc, char **argv)
 	}
 	display.mlx_win = mlx_new_window(display.mlx, 1920, 1080, "Cub3D - 42");
 	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);
+	mlx_hook(display.mlx_win, ON_KEYDOWN, 27, &check_keycode, &display);
+	mlx_mouse_hook(display.mlx_win, &check_mousecode, &display);
 	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);
