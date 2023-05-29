@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:04:48 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/26 15:25:24 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 14:13:40 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,21 @@ int	parsing(int argc, char **argv, t_display *display)
 		return (EXIT_FAILURE);
 	if (get_map(fd, display->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+
+	int line;
+	int column;
+	line = 0;
+	while (display->map->map[line])
+	{
+		column = 0;
+		while (display->map->map[line][column])
+		{
+			printf("[%c]", display->map->map[line][column]);
+			column++;
+		}
+		printf("\n");
+		line++;
+	}
+	
 	return (EXIT_SUCCESS);
 }

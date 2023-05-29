@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/26 15:28:23 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 14:22:44 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@
 
 // OS
 # ifndef OS_LINUX
-# define OS_LINUX 0
+#  define OS_LINUX 0
 # endif
 
 # ifndef OS_DARWIN
-# define OS_DARWIN 0
+#  define OS_DARWIN 0
 # endif
 
 // Map structure
 typedef struct s_map
 {
-	int		nb_parameter_set;
-	char	*path_texture_no;
-	char	*path_texture_so;
-	char	*path_texture_we;
-	char	*path_texture_ea;
-	void	*texture_no;
-	void	*texture_so;
-	void	*texture_we;
-	void	*texture_ea;
-	char	*color_f;
-	char	*color_c;
-	t_list	*map;
+	int			nb_parameter_set;
+	char		*path_texture_no;
+	char		*path_texture_so;
+	char		*path_texture_we;
+	char		*path_texture_ea;
+	void		*texture_no;
+	void		*texture_so;
+	void		*texture_we;
+	void		*texture_ea;
+	char		*color_f;
+	char		*color_c;
+	int			**map;
 }	t_map;
 
 // Display structure
@@ -74,7 +74,9 @@ int		is_texture_color(char **line_tab, t_map *map);
 
 // get_map.c
 int		get_map(int fd, t_map *map);
-int		fill_map(char *line, t_map *map);
+int		fill_temp_map(char *line, t_list_char **temp_map);
+int		fill_map(t_map *map, t_list_char *temp_map);
+int		find_big_line(t_list_char *temp_map);
 
 // events.c
 int		quit_window(t_display *display);
@@ -89,5 +91,8 @@ void	bad_format_line(int idx);
 // load_textures.c
 int		load_textures(t_display *display);
 int		load_xpm_file(t_display *display, char *path, void *img);
+
+// free_memory.c
+void	free_map(t_map *map);
 
 #endif

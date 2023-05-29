@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:43:35 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/26 14:53:11 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 11:42:28 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,17 @@ int	is_texture_color(char **line_tab, t_map *map)
 {
 	if (ft_len_tab(line_tab) != 2 && map->nb_parameter_set < 6)
 		return (EXIT_FAILURE);
-	if (!ft_strcmp(line_tab[0], "NO"))
+	if (!ft_strcmp(line_tab[0], "NO") && !map->path_texture_no)
 		map->path_texture_no = ft_strdup(line_tab[1]);
-	else if (!ft_strcmp(line_tab[0], "SO"))
+	else if (!ft_strcmp(line_tab[0], "SO") && !map->path_texture_so)
 		map->path_texture_so = ft_strdup(line_tab[1]);
-	else if (!ft_strcmp(line_tab[0], "WE"))
+	else if (!ft_strcmp(line_tab[0], "WE") && !map->path_texture_we)
 		map->path_texture_we = ft_strdup(line_tab[1]);
-	else if (!ft_strcmp(line_tab[0], "EA"))
+	else if (!ft_strcmp(line_tab[0], "EA") && !map->path_texture_ea)
 		map->path_texture_ea = ft_strdup(line_tab[1]);
-	else if (!ft_strcmp(line_tab[0], "F"))
+	else if (!ft_strcmp(line_tab[0], "F") && !map->color_f)
 		map->color_f = ft_strdup(line_tab[1]);
-	else if (!ft_strcmp(line_tab[0], "C"))
+	else if (!ft_strcmp(line_tab[0], "C") && !map->color_c)
 		map->color_c = ft_strdup(line_tab[1]);
 	else
 	{

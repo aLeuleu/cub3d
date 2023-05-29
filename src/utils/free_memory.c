@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:32:12 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 11:54:25 by lpupier          ###   ########.fr       */
+/*   Created: 2023/05/29 11:04:59 by lpupier           #+#    #+#             */
+/*   Updated: 2023/05/29 12:49:04 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	quit_window(t_display *display)
+void	free_map(t_map *map)
 {
-	free_map(display->map);
-	mlx_destroy_window(display->mlx, display->mlx_win);
-	if (OS_LINUX)
-		mlx_destroy_display(display->mlx);
-	free(display->mlx);
-	exit(EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
+	free(map->path_texture_no);
+	free(map->path_texture_so);
+	free(map->path_texture_we);
+	free(map->path_texture_ea);
+	free(map->color_f);
+	free(map->color_c);
 }

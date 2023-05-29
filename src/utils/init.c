@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/26 16:06:15 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/29 14:19:32 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	init_map_struct(t_display *display)
 	display->map->texture_so = NULL;
 	display->map->texture_we = NULL;
 	display->map->texture_ea = NULL;
+	display->map->color_c = NULL;
+	display->map->color_f = NULL;
 	display->map->map = NULL;
 	return (EXIT_SUCCESS);
 }
