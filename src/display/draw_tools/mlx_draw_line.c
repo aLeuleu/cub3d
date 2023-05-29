@@ -12,6 +12,13 @@
 
 #include "cub3d.h"
 
+static size_t		ft_max(size_t a, size_t b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
 void	mlx_draw_line(t_display *display, t_p a, t_p b, int color)
 {
 	int		i;

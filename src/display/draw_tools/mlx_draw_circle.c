@@ -31,13 +31,6 @@ void mlx_draw_circle(t_display *display, int radius, int pos[2], int color)
 	}
 }
 
-static size_t		ft_max(size_t a, size_t b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
 void mlx_draw_circle_oriented(t_display *display, int radius, double angle, int color, int pos[2])
 {
 	mlx_draw_circle(display, radius, pos, color);
