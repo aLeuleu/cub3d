@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 11:44:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 15:34:23 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@
 #  define KEY_RIGHT 124
 #  define KEY_UP 126
 #  define KEY_DOWN 125
+#  define MOUSE_LEFT 1
+#  define MOUSE_MIDDLE 2
+#  define MOUSE_RIGHT 3
+#  define MOUSE_DOWN 4
+#  define MOUSE_UP 5
 # endif
 
 // Point structure
@@ -181,7 +186,7 @@ typedef struct s_player
 	t_p		pos;
 	double 	orientation;
 	double	fov;
-	int 	speed;
+	double 	speed;
 	int 	score;
 	int 	life;
 	int 	max_life;
@@ -212,9 +217,13 @@ enum {
 	ON_DESTROY = 17
 };
 
+// main.c
+int		main(int argc, char **argv);
+
 // init.c
 int		init_display_struct(t_display *display);
 int		init_map_struct(t_display *display);
+void	init_player(t_display *display);
 
 // parsing.c
 int		parsing(int argc, char **argv, t_display *display);
@@ -231,6 +240,9 @@ void	get_player_position(t_player *player, t_map *map);
 // get_map.c
 int		get_map(int fd, t_map *map);
 
+// map_format.c
+int		map_is_formated(t_map *map);
+
 // events.c
 int		quit_window(t_display *display);
 
@@ -245,6 +257,7 @@ int		player_movements(t_display *display);
 // errors.c
 void	error(char *str);
 void	bad_format_line(int idx);
+void	bad_format_tab(char *text, int line, int column);
 
 // load_textures.c
 int		load_textures(void *mlx, t_map *map);

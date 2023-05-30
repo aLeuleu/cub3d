@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 18:21:33 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 15:06:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ static int	find_big_line(t_list_char *temp_map)
 		temp = temp->next;
 	}
 	return (len);
+}
+
+static int	init_map_arg(t_map *map, t_list_char *temp_map)
+{
+	map->height = ft_lstsize((t_list *)temp_map);
+	map->width = find_big_line(temp_map);
+	map->map = malloc(sizeof(char **) * (map->height + 1));
+	if (!map->map)
+		return (EXIT_FAILURE);
+	map->map[map->height] = NULL;
+	return (EXIT_SUCCESS);
 }
 
 static int	fill_temp_map(char *line, t_list_char **temp_map)
@@ -64,33 +75,27 @@ static int	fill_map(t_map *map, t_list_char *temp_map)
 	int			len;
 	int			idx;
 
-	map->height = ft_lstsize((t_list *)temp_map);
-	map->width = find_big_line(temp_map);
-	map->map = malloc(sizeof(char **) * (map->height + 1));
-	if (!map->map)
+	if (init_map_arg(map, temp_map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	temp = temp_map;
-	len = 0;
+	len = -1;
 	while (temp)
 	{
-		map->map[len] = malloc(sizeof(char *) * (map->width + 1));
+		map->map[++len] = malloc(sizeof(char *) * (map->width + 1));
 		if (!map->map[len])
 			return (EXIT_FAILURE);
-		idx = 0;
-		while (temp->content[idx])
+		idx = -1;
+		while (temp->content[++idx])
 		{
 			if (temp->content[idx] == '\n')
 				break ;
 			map->map[len][idx] = temp->content[idx];
-			idx++;
 		}
 		while (idx < map->width)
 			map->map[len][idx++] = ' ';
 		map->map[len][idx] = '\0';
-		len++;
 		temp = temp->next;
 	}
-	map->map[len] = NULL;
 	return (EXIT_SUCCESS);
 }
 

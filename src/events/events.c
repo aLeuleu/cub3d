@@ -6,20 +6,12 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:32:12 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 10:50:15 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 14:41:44 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/**
- * The function destroys all images and windows created by the program
- * and frees allocated memory before exiting.
- *
- * @param display The parameter "display" is a pointer to a struct of type "t_display".
- *
- * @return (int) Return EXIT_SUCCESS pr EXIT_FAILURE
- */
 int	quit_window(t_display *display)
 {
 	free_images(display);

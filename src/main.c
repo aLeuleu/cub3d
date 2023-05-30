@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 11:40:51 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 15:31:30 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	main(int argc, char **argv)
 {
 	t_display	display;
 
-	// A deplacer tu connais
-	ft_memset(display.keys, 0, 70000);
-
 	init_display_struct(&display);
 	init_map_struct(&display);
+	init_player(&display);
 	if (parsing(argc, argv, &display) == EXIT_FAILURE)
+		return (quit_window(&display), EXIT_FAILURE);
+	if (map_is_formated(&display.map) == EXIT_FAILURE)
 		return (quit_window(&display), EXIT_FAILURE);
 	if (load_textures(display.mlx, &display.map) == EXIT_FAILURE)
 	{
@@ -46,9 +46,4 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);
-}
-
-void	init_player(t_display *display)
-{
-	display->player.fov = 60;
 }

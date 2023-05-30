@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/30 10:57:17 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/30 14:40:21 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC_PARSING		=	${DIR_PARSING}parsing.c					\
 					${DIR_PARSING}get_textures_colors.c		\
 					${DIR_PARSING}get_map.c					\
 					${DIR_PARSING}get_player_position.c		\
+					${DIR_PARSING}map_format.c
 
 # Utils files
 SRC_UTILS		=	${DIR_UTILS}errors.c		\

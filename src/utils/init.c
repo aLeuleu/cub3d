@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 10:40:55 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 15:33:31 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
  */
 int	init_display_struct(t_display *display)
 {
+	ft_memset(display->keys, 0, 70000);
 	display->width = 1920;
 	display->height = 1080;
 	display->mlx = mlx_init();
@@ -55,4 +56,10 @@ int	init_map_struct(t_display *display)
 	display->map.color_f = NULL;
 	display->map.map = NULL;
 	return (EXIT_SUCCESS);
+}
+
+void	init_player(t_display *display)
+{
+	display->player.fov = 60;
+	display->player.speed = 1;
 }
