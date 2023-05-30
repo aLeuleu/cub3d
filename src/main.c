@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		error("An error occurred while loading a texture");
 		return (quit_window(&display), EXIT_FAILURE);
 	}
-//	init_player(&display);
+	init_player(&display);
 	display.mlx_win = mlx_new_window(\
 		display.mlx, display.width, display.height, "Cub3D - 42");
 	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);

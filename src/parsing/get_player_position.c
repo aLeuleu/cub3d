@@ -22,7 +22,6 @@ void	get_player_position(t_player *player, t_map *map)
 	int j;
 
 	i = 0;
-	j = 0;
 	pos_x = -1;
 	pos_y = -1;
 	while(i < map->height)
@@ -42,8 +41,8 @@ void	get_player_position(t_player *player, t_map *map)
 	}
 	if (pos_x < 0 || pos_y < 0)
 		return ;
-	player->pos_x = pos_x;
-	player->pos_y = pos_y;
+	player->pos.x = pos_x;
+	player->pos.y = pos_y;
 	get_player_orientation(player, map);
 }
 
@@ -52,8 +51,8 @@ static void	get_player_orientation(t_player *player, const t_map *map)
 	int pos_x;
 	int pos_y;
 
-	pos_x = player->pos_x;
-	pos_y = player->pos_y;
+	pos_x = (int)player->pos.x;
+	pos_y = (int)player->pos.y;
 	if (map->map[pos_y][pos_x] == 'N')
 		player->orientation = 3*M_PI / 2;
 	else if (map->map[pos_y][pos_x] == 'S')

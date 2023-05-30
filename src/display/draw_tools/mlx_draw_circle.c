@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void mlx_draw_circle(t_display *display, int radius, int pos[2], int color)
+void mlx_draw_circle(t_display *display, int radius, t_p pos, int color)
 {
 	int	i;
 	int	j;
@@ -24,32 +24,32 @@ void mlx_draw_circle(t_display *display, int radius, int pos[2], int color)
 		while (j < radius)
 		{
 			if (i * i + j * j <= radius * radius)
-				my_mlx_pixel_put(&display->img, j + pos[0], i + pos[1], color);
+				my_mlx_pixel_put(&display->img, j + pos.x, i + pos.y, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void mlx_draw_circle_oriented(t_display *display, int radius, double angle, int color, int pos[2])
+void mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos)
 {
 	bool collision = false;
 	t_p a;
 	t_p b;
 
 	mlx_draw_circle(display, radius, pos, color);
-	(void)angle;
-	a.x = pos[0];
-	a.y = pos[1];
+	(void)orientation;
+	a.x = pos.x;
+	a.y = pos.y;
 
 	int i = 0;
 	while (!collision)
 	{
 		i++;
-		b.x = pos[0] + cos(angle) * i;
-		b.y = pos[1] + sin(angle) * i;
+		b.x = pos.x + cos(orientation) * i;
+		b.y = pos.y + sin(orientation) * i;
 		if (display->map.map[(int)b.y / 40][(int)b.x / 40] == '1')
 			collision = true;
 	}
-	mlx_draw_line(display, a, b, 0x0000FF);
+	mlx_draw_line(display, a, b, 0xFF1111);
 }

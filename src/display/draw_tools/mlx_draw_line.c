@@ -27,7 +27,7 @@ void	mlx_draw_line(t_display *display, t_p a, t_p b, int color)
 	float	y;
 	t_p		to_draw;
 
-	steps = ft_max(abs(b.x - a.x), abs(b.y - a.y));
+	steps = ft_max(fabs(b.x - a.x), fabs(b.y - a.y));
 	x = a.x;
 	y = a.y;
 	i = 0;

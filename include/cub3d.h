@@ -142,9 +142,9 @@
 
 // Point structure
 typedef struct s_p {
-	int		x;
-	int		y;
-	int		color;
+	double		x;
+	double		y;
+	int			color;
 }				t_p;
 
 // Data image structure
@@ -178,8 +178,7 @@ typedef struct s_map
 // Player structure
 typedef struct s_player
 {
-	double 	pos_x;
-	double 	pos_y;
+	t_p		pos;
 	double 	orientation;
 	double	fov;
 	int 	speed;
@@ -263,8 +262,12 @@ void	display_minimap(t_display *display);
 //draw_tools
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	mlx_draw_square(t_display *display, int side_len, int pos[2], int color);
-void	mlx_draw_circle(t_display *display, int side_len, int pos[2], int color);
-void	mlx_draw_circle_oriented(t_display *display, int radius, double angle, int color, int pos[2]);
+void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color);
+void	mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos);
 void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
 
+//	player behavior
+void	init_player(t_display *display);
+void	draw_player(t_display *display, int zoom);
+void	mlx_draw_fov(t_display *display, int zoom);
 #endif

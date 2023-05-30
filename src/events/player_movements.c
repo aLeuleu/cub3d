@@ -15,16 +15,16 @@
 int	player_movements(t_display *display)
 {
 	if (display->keys[KEY_LEFT])
-		display->player.orientation -= 1;
+		display->player.orientation -= 0.1;
 	else if (display->keys[KEY_RIGHT])
-		display->player.orientation += 1;
+		display->player.orientation += 0.1;
 	if (display->keys[KEY_W])
-		display->player.pos_y -= 1;
+		display->player.pos.y -= 0.1;
 	else if (display->keys[KEY_S])
-		display->player.pos_y += 1;
+		display->player.pos.y += 0.1;
 	else if (display->keys[KEY_A])
-		display->player.pos_x -= 1;
+		display->player.pos.x -= 0.1;
 	else if (display->keys[KEY_D])
-		display->player.pos_x += 1;
+		display->player.pos.x += 0.1;
 	return (EXIT_SUCCESS);
 }

@@ -29,12 +29,38 @@ void	display_minimap(t_display *display)
 			pos[0] = column * zoom;
 			pos[1] = line * zoom;
 			if (display->map.map[line][column] == '1')
-				mlx_draw_square(display, zoom, pos, 0xFFFFFF);
+				mlx_draw_square(display, zoom, pos, 0xDDDD00);
 			column++;
 		}
 		line++;
 	}
-	pos[0] = display->player.pos_x * zoom;
-	pos[1] = display->player.pos_y * zoom;
-	mlx_draw_circle_oriented(display, zoom / 3, display->player.orientation, 0xFF0000, pos);
+	draw_player(display, zoom);
+}
+
+void	draw_player(t_display *display, int zoom)
+{
+	t_p pos;
+
+	pos.x = display->player.pos.x * zoom;
+	pos.y = display->player.pos.y * zoom;
+	mlx_draw_circle_oriented(display, zoom / 2, display->player.orientation, 0xFF0000, pos);
+	mlx_draw_fov(display, zoom);
+}
+
+void	mlx_draw_fov(t_display *display, int zoom)
+{
+	t_p pos;
+	t_p a;
+	t_p b;
+
+	pos.x = display->player.pos.x * zoom;
+	pos.y = display->player.pos.y * zoom;
+	a.x = pos.x + cos(display->player.orientation - M_PI / 6) * 100;
+	a.y = pos.y + sin(display->player.orientation - M_PI / 6) * 100;
+	b.x = pos.x + cos(display->player.orientation + M_PI / 6) * 100;
+	b.y = pos.y + sin(display->player.orientation + M_PI / 6) * 100;
+//	mlx_draw_line(display, a, b, 0xFFFFFF);
+	mlx_draw_line(display, pos, a, 0xFFFFFF);
+	mlx_draw_line(display, pos, b, 0xFFFFFF);
+
 }
