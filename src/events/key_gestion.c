@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frames.c                                    :+:      :+:    :+:   */
+/*   key_gestion.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 18:17:43 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 10:39:48 by lpupier          ###   ########.fr       */
+/*   Created: 2023/05/30 10:50:19 by lpupier           #+#    #+#             */
+/*   Updated: 2023/05/30 11:44:58 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	render_frames(t_display *display)
+int	check_keycode(int keycode, t_display *display)
 {
-	ft_memset(display->img.addr, 0, display->height * display->img.line_length);
-	display_minimap(display);
-	mlx_put_image_to_window(\
-		display->mlx, display->mlx_win, display->img.img, 0, 0);
+	display->keys[keycode] = 1;
+	player_movements(display);
+	return (EXIT_SUCCESS);
+}
+
+int	check_keycode_up(int keycode, t_display *display)
+{
+	display->keys[keycode] = 0;
+	return (EXIT_SUCCESS);
+}
+
+int	check_mousecode(int mousecode, int x, int y, t_display *display)
+{
+	(void)display;
+	(void)x;
+	(void)y;
+	printf("# define MOUSE_ %d\n", mousecode);
 	return (EXIT_SUCCESS);
 }

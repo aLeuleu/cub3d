@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/29 18:39:56 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/30 10:57:17 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ DIR_OBJ			=	.obj/
 DIR_PARSING		=	${DIR_SRC}parsing/
 DIR_UTILS		=	${DIR_SRC}utils/
 DIR_DISPLAY		=	${DIR_SRC}display/
+DIR_EVENTS		=	${DIR_SRC}events/
 
 # Headers files
 HEADER			=	${DIR_HEADER}cub3d.h	\
@@ -48,7 +49,12 @@ SRC_UTILS		=	${DIR_UTILS}errors.c		\
 					${DIR_UTILS}init.c			\
 					${DIR_UTILS}free_memory.c
 
-# Utils files
+# Events files
+SRC_EVENTS		=	${DIR_EVENTS}events.c			\
+					${DIR_EVENTS}key_gestion.c		\
+					${DIR_EVENTS}player_movements.c
+
+# Display files
 SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
 					${DIR_DISPLAY}render_frames.c \
 					${DIR_DISPLAY}draw_tools/mlx_draw_square.c \
@@ -59,10 +65,10 @@ SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\
-					${DIR_SRC}events.c	\
 					${SRC_PARSING}		\
 					${SRC_UTILS}		\
-					${SRC_DISPLAY}
+					${SRC_DISPLAY}		\
+					${SRC_EVENTS}
 
 # Objects
 OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}
@@ -91,7 +97,7 @@ all:			${NAME}
 
 ${DIR_OBJ}%.o:	%.c	${HEADER}
 				@mkdir -p ${shell dirname $@}
-				${CC} ${FLAGS} -c $< -o $@ -I ${DIR_HEADER} ${DEFINE_OS}
+				${CC} ${FLAGS} -c $< -o $@ -I ${DIR_HEADER} ${DEFINE_OS} 
 
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 

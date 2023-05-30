@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:52:54 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 10:40:55 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
  */
 int	init_display_struct(t_display *display)
 {
+	display->width = 1920;
+	display->height = 1080;
 	display->mlx = mlx_init();
-	display->img.img = mlx_new_image(display->mlx, 1920, 1080);
+	display->img.img = mlx_new_image(\
+		display->mlx, display->width, display->height);
 	display->img.addr = mlx_get_data_addr(\
 		display->img.img, \
 		&display->img.bits_per_pixel, \

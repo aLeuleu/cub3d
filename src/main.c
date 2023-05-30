@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 18:57:28 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 11:40:51 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	main(int argc, char **argv)
 {
 	t_display	display;
 
+	// A deplacer tu connais
+	ft_memset(display.keys, 0, 70000);
+
 	init_display_struct(&display);
 	init_map_struct(&display);
 	if (parsing(argc, argv, &display) == EXIT_FAILURE)
@@ -33,9 +36,11 @@ int	main(int argc, char **argv)
 		error("An error occurred while loading a texture");
 		return (quit_window(&display), EXIT_FAILURE);
 	}
-	display.mlx_win = mlx_new_window(display.mlx, 1920, 1080, "Cub3D - 42");
+	display.mlx_win = mlx_new_window(\
+		display.mlx, display.width, display.height, "Cub3D - 42");
 	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);
-	mlx_hook(display.mlx_win, ON_KEYDOWN, 27, &check_keycode, &display);
+	mlx_hook(display.mlx_win, ON_KEYDOWN, 1L<<0, &check_keycode, &display);
+	mlx_hook(display.mlx_win, ON_KEYUP, 1L<<1, &check_keycode_up, &display);
 	mlx_mouse_hook(display.mlx_win, &check_mousecode, &display);
 	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);

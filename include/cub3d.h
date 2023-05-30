@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 18:58:16 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/30 11:44:40 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@
 #  define OS_LINUX 0
 # endif
 
-# if OS_LINUX == 1
+# ifndef OS_DARWIN
+#  define OS_DARWIN 0
+# endif
+
 // Linux keycode
+# if OS_LINUX == 1
 #  define KEY_W 119
 #  define KEY_E 101
 #  define KEY_R 114
@@ -89,8 +93,8 @@
 #  define MOUSE_UP 5
 # endif
 
-# if OS_DARWIN
 //Darwin keycode
+# if OS_DARWIN == 1
 #  define KEY_Q 12
 #  define KEY_W 13
 #  define KEY_E 14
@@ -133,9 +137,6 @@
 #  define KEY_RIGHT 124
 #  define KEY_UP 126
 #  define KEY_DOWN 125
-# endif
-# ifndef OS_DARWIN
-#  define OS_DARWIN 0
 # endif
 
 // Point structure
@@ -191,6 +192,9 @@ typedef struct s_display
 {
 	void		*mlx;
 	void		*mlx_win;
+	int			height;
+	int			width;
+	int			keys[70000];
 	t_data		img;
 	t_map		map;
 	t_player	player;
@@ -228,8 +232,14 @@ int		get_map(int fd, t_map *map);
 
 // events.c
 int		quit_window(t_display *display);
+
+// key_gestion.c
 int		check_keycode(int keycode, t_display *display);
+int		check_keycode_up(int keycode, t_display *display);
 int		check_mousecode(int moutsecode, int x, int y, t_display *display);
+
+// player_movements.c
+int		player_movements(t_display *display);
 
 // errors.c
 void	error(char *str);
