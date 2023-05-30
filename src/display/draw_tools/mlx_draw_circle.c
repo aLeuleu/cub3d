@@ -33,14 +33,23 @@ void mlx_draw_circle(t_display *display, int radius, int pos[2], int color)
 
 void mlx_draw_circle_oriented(t_display *display, int radius, double angle, int color, int pos[2])
 {
-	mlx_draw_circle(display, radius, pos, color);
+	bool collision = false;
 	t_p a;
 	t_p b;
 
+	mlx_draw_circle(display, radius, pos, color);
 	(void)angle;
 	a.x = pos[0];
 	a.y = pos[1];
-	b.x = pos[0] + cos(angle) * radius;
-	b.y = pos[1] + sin(angle) * radius;
-	mlx_draw_line(display, a, b, 0xFFFFFF);
+
+	int i = 0;
+	while (!collision)
+	{
+		i++;
+		b.x = pos[0] + cos(angle) * i;
+		b.y = pos[1] + sin(angle) * i;
+		if (display->map.map[(int)b.y / 40][(int)b.x / 40] == '1')
+			collision = true;
+	}
+	mlx_draw_line(display, a, b, 0x0000FF);
 }

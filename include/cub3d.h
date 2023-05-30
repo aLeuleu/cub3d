@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 // Minilibx & libft
 # include "mlx.h"
@@ -177,9 +178,10 @@ typedef struct s_map
 // Player structure
 typedef struct s_player
 {
-	int 	pos_x;
-	int 	pos_y;
+	double 	pos_x;
+	double 	pos_y;
 	double 	orientation;
+	double	fov;
 	int 	speed;
 	int 	score;
 	int 	life;
