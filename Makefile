@@ -14,7 +14,8 @@
 NAME			=	cub3d
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -lm -g3 -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS_MATH		=	-lm
 
 # Libft support
 DIR_LIBFT		=	libft/
@@ -95,7 +96,7 @@ ${DIR_OBJ}%.o:	%.c	${HEADER}
 ${DIR_OBJ}:		${MKDIR} ${DIR_OBJ}
 
 ${NAME}:		${LIBFT} ${OBJ}
-				${CC} ${FLAGS} ${OBJ} ${LIBFT} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS} ${DEFINE_OS}
+				${CC} ${FLAGS} ${OBJ} ${LIBFT} -o ${NAME} -Llib -l${MLX} ${MLX_FLAGS} ${DEFINE_OS} ${FLAGS_MATH}
 
 ${LIBFT}:		FORCE
 				${MAKE} -C ${DIR_LIBFT}
