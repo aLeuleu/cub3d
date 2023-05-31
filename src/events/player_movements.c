@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:56:09 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 15:35:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 15:22:03 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	player_movements(t_display *display)
 	new_pos_x = display->player.pos.x;
 	new_pos_y = display->player.pos.y;
 	speed = display->player.speed / 10;
-	if (display->keys[KEY_LEFT])
+	if (display->keys[KEY_Q])
 		display->player.orientation -= 0.1;
-	else if (display->keys[KEY_RIGHT])
+	else if (display->keys[KEY_E])
 		display->player.orientation += 0.1;
 	if (diagonals_movements(display, speed) == EXIT_SUCCESS)
 		return (EXIT_SUCCESS);

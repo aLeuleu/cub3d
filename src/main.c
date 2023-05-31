@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:34:37 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 15:10:20 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	main(int argc, char **argv)
 {
 	t_display	display;
 
-	init_display_struct(&display);
-	init_map_struct(&display);
+	if (init_display_struct(&display) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	init_map_struct(&display.map);
 	init_player(&display);
 	if (parsing(argc, argv, &display) == EXIT_FAILURE)
 		return (quit_window(&display), EXIT_FAILURE);
@@ -37,10 +38,10 @@ int	main(int argc, char **argv)
 		return (quit_window(&display), EXIT_FAILURE);
 	display.mlx_win = mlx_new_window(\
 		display.mlx, display.width, display.height, "Cub3D - 42");
-	mlx_hook(display.mlx_win, 17, 0, &quit_window, &display);
-	mlx_hook(display.mlx_win, ON_KEYDOWN, 1L<<0, &check_keycode, &display);
-	mlx_hook(display.mlx_win, ON_KEYUP, 1L<<1, &check_keycode_up, &display);
-	mlx_mouse_hook(display.mlx_win, &check_mousecode, &display);
+	mlx_hook(display.mlx_win, 2, 1L << 0, check_keycode, &display);
+	mlx_hook(display.mlx_win, 3, 1L << 1, check_keycode_up, &display);
+	mlx_hook(display.mlx_win, 6, 1L << 6, check_mousecode, &display);
+	mlx_hook(display.mlx_win, 17, 0, quit_window, &display);
 	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);

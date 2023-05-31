@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:45:57 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 15:21:48 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 
 // Linux keycode
 # if OS_LINUX == 1
+#  define KEY_Q 113
 #  define KEY_W 119
 #  define KEY_E 101
 #  define KEY_R 114
@@ -61,16 +62,6 @@
 #  define KEY_B 98
 #  define KEY_N 110
 #  define KEY_M 109
-#  define KEY_NUMPAD_0 65438
-#  define KEY_NUMPAD_1 65436
-#  define KEY_NUMPAD_2 65433
-#  define KEY_NUMPAD_3 65435
-#  define KEY_NUMPAD_4 65430
-#  define KEY_NUMPAD_5 65437
-#  define KEY_NUMPAD_6 65432
-#  define KEY_NUMPAD_7 65429
-#  define KEY_NUMPAD_8 65431
-#  define KEY_NUMPAD_9 65434
 #  define KEY_0 48
 #  define KEY_1 49
 #  define KEY_2 50
@@ -81,12 +72,8 @@
 #  define KEY_7 55
 #  define KEY_8 56
 #  define KEY_9 57
-#  define KEY_UP 65362
-#  define KEY_DOWN 65364
-#  define KEY_LEFT 65361
-#  define KEY_RIGHT 65363
 #  define KEY_SPACE 32
-#  define KEY_ENTER 65293
+#  define KEY_ESCAPE 65307
 #  define MOUSE_LEFT 1
 #  define MOUSE_MIDDLE 2
 #  define MOUSE_RIGHT 3
@@ -206,12 +193,11 @@ typedef struct s_display
 	void		*mlx_win;
 	int			height;
 	int			width;
-	int			keys[70000];
+	int			*keys;
 	int			display_mode;
 	t_data		img;
 	t_map		map;
 	t_player	player;
-
 }	t_display;
 
 // Key events
@@ -230,7 +216,7 @@ int		main(int argc, char **argv);
 
 // init.c
 int		init_display_struct(t_display *display);
-int		init_map_struct(t_display *display);
+int		init_map_struct(t_map *map);
 void	init_player(t_display *display);
 
 // parsing.c

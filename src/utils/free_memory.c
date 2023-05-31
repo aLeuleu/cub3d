@@ -6,11 +6,11 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:04:59 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 10:29:46 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 14:18:09 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 void	free_map(t_map *map)
 {

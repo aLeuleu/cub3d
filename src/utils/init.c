@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:47:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 15:22:16 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@
  */
 int	init_display_struct(t_display *display)
 {
-	ft_memset(display->keys, 0, 70000);
+	int	idx;
+
+	display->keys = malloc(sizeof(int) * 256);
+	if (!display->keys)
+		return (EXIT_FAILURE);
+	idx = -1;
+	while (++idx < 256)
+		display->keys[idx] = 0;
 	display->display_mode = MINIMAP;
 	display->width = 1920;
 	display->height = 1080;
@@ -42,23 +49,23 @@ int	init_display_struct(t_display *display)
  * @param display General structure for screen display (see include/cub3d.h)
  * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
  */
-int	init_map_struct(t_display *display)
+int	init_map_struct(t_map *map)
 {
-	display->map.nb_parameter_set = 0;
-	display->map.path_texture_no = NULL;
-	display->map.path_texture_so = NULL;
-	display->map.path_texture_we = NULL;
-	display->map.path_texture_ea = NULL;
-	display->map.texture_no = NULL;
-	display->map.texture_so = NULL;
-	display->map.texture_we = NULL;
-	display->map.texture_ea = NULL;
-	display->map.color_c_raw = NULL;
-	display->map.color_f_raw = NULL;
-	display->map.color_c = 0;
-	display->map.color_f = 0;
-	display->map.map = NULL;
-	display->map.zoom = 40;
+	map->nb_parameter_set = 0;
+	map->path_texture_no = NULL;
+	map->path_texture_so = NULL;
+	map->path_texture_we = NULL;
+	map->path_texture_ea = NULL;
+	map->texture_no = NULL;
+	map->texture_so = NULL;
+	map->texture_we = NULL;
+	map->texture_ea = NULL;
+	map->color_c_raw = NULL;
+	map->color_f_raw = NULL;
+	map->color_c = 0;
+	map->color_f = 0;
+	map->map = NULL;
+	map->zoom = 40;
 	return (EXIT_SUCCESS);
 }
 
