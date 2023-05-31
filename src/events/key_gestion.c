@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:50:19 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:25:34 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 13:43:04 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	check_keycode(int keycode, t_display *display)
 {
 	display->keys[keycode] = 1;
 	player_movements(display);
+	check_minimap_opening(display);
 	return (EXIT_SUCCESS);
 }
 

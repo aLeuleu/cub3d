@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 10:29:18 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 13:47:40 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 int	init_display_struct(t_display *display)
 {
 	ft_memset(display->keys, 0, 70000);
+	display->display_mode = MINIMAP;
 	display->width = 1920;
 	display->height = 1080;
 	display->mlx = mlx_init();

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frames.c                                    :+:      :+:    :+:   */
+/*   minimap_opening.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 18:17:43 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:46:47 by lpupier          ###   ########.fr       */
+/*   Created: 2023/05/31 13:43:16 by lpupier           #+#    #+#             */
+/*   Updated: 2023/05/31 13:45:45 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	render_frames(t_display *display)
+int	check_minimap_opening(t_display *display)
 {
-	ft_memset(display->img.addr, 0, display->height * display->img.line_length);
-	if (display->display_mode == MINIMAP)
-		display_minimap(display);
-	mlx_put_image_to_window(\
-		display->mlx, display->mlx_win, display->img.img, 0, 0);
+	if (display->keys[KEY_M])
+	{
+		if (display->display_mode == GAME)
+			display->display_mode = MINIMAP;
+		else
+			display->display_mode = GAME;
+	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/31 10:50:15 by lpupier          ###   ########.fr        #
+#    Updated: 2023/05/31 13:44:45 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRC_UTILS		=	${DIR_UTILS}errors.c		\
 # Events files
 SRC_EVENTS		=	${DIR_EVENTS}events.c			\
 					${DIR_EVENTS}key_gestion.c		\
-					${DIR_EVENTS}player_movements.c
+					${DIR_EVENTS}player_movements.c	\
+					${DIR_EVENTS}minimap_opening.c
 
 # Display files
 SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \

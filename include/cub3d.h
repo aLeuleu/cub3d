@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 11:14:10 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 13:45:57 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@
 #  define MOUSE_UP 5
 # endif
 
+# define GAME 0
+# define MINIMAP 1
+
 // Point structure
 typedef struct s_p {
 	double		x;
@@ -204,6 +207,7 @@ typedef struct s_display
 	int			height;
 	int			width;
 	int			keys[70000];
+	int			display_mode;
 	t_data		img;
 	t_map		map;
 	t_player	player;
@@ -252,6 +256,9 @@ int 	load_colors(t_map *map);
 
 // events.c
 int		quit_window(t_display *display);
+
+// minimap_opening.c
+int		check_minimap_opening(t_display *display);
 
 // key_gestion.c
 int		check_keycode(int keycode, t_display *display);
