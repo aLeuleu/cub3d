@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 10:33:21 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 13:34:11 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 static int	load_xpm_file(void *mlx, char *path, void **img)
 {
-	char	*new_path;
 	int		img_width;
 	int		img_height;
 
-	if (path[ft_strlen(path) - 1] == '\n')
-		new_path = ft_substr(path, 0, ft_strlen(path) - 1);
-	else
-		new_path = ft_strdup(path);
 	*(img) = mlx_xpm_file_to_image(\
 		mlx, \
-		new_path, \
+		path, \
 		&img_width, \
 		&img_height);
-	free(new_path);
-	if (!img)
+	if (*(img) == NULL)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
