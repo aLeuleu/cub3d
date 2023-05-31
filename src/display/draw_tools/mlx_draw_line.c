@@ -35,7 +35,7 @@ void	mlx_draw_line(t_display *display, t_p a, t_p b, int color)
 	{
 		to_draw.x = round(x);
 		to_draw.y = round(y);
-		my_mlx_pixel_put(&display->img, to_draw.x, to_draw.y, color);
+		my_mlx_pixel_put(display, to_draw.x, to_draw.y, color);
 		x += (b.x - a.x) / (float)steps;
 		y += (b.y - a.y) / (float)steps;
 		i++;

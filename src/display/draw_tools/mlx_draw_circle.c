@@ -24,7 +24,7 @@ void mlx_draw_circle(t_display *display, int radius, t_p pos, int color)
 		while (j < radius)
 		{
 			if (i * i + j * j <= radius * radius)
-				my_mlx_pixel_put(&display->img, j + pos.x, i + pos.y, color);
+				my_mlx_pixel_put(display, j + pos.x, i + pos.y, color);
 			j++;
 		}
 		i++;

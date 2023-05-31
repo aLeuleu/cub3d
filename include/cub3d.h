@@ -273,7 +273,7 @@ void	free_images(t_display *display);
 void	display_minimap(t_display *display);
 
 //draw_tools
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_display *display, int x, int y, int color);
 void	mlx_draw_square(t_display *display, int side_len, int pos[2], int color);
 void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color);
 void	mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos);

@@ -23,7 +23,7 @@ void mlx_draw_square(t_display *display, int side_len, int pos[2], int color)
 		j = 0;
 		while (j < side_len)
 		{
-			my_mlx_pixel_put(&display->img, j + pos[0], i + pos[1], color);
+			my_mlx_pixel_put(display, j + pos[0], i + pos[1], color);
 			j++;
 		}
 		i++;
