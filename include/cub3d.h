@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 15:34:23 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 11:14:10 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,10 @@ typedef struct s_map
 	void		*texture_so;
 	void		*texture_we;
 	void		*texture_ea;
-	char		*color_f;
-	char		*color_c;
+	char		*color_f_raw;
+	char		*color_c_raw;
+	int			color_f;
+	int			color_c;
 	char		**map;
 	int			height;
 	int			width;
@@ -242,6 +244,9 @@ int		get_map(int fd, t_map *map);
 
 // map_format.c
 int		map_is_formated(t_map *map);
+
+// load_colors.c
+int 	load_colors(t_map *map);
 
 // events.c
 int		quit_window(t_display *display);

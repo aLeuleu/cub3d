@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 18:22:11 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:33:21 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,32 @@ static int	load_xpm_file(void *mlx, char *path, void **img)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief Function used to load all the textures of the game
- * in order to reuse them.
- * 
- * @param mlx
- * @param map
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
 int	load_textures(void *mlx, t_map *map)
 {
+	int	status;
+
+	status = EXIT_SUCCESS;
 	if (load_xpm_file(mlx, map->path_texture_no, &map->texture_no))
-		return (EXIT_FAILURE);
+		status = EXIT_FAILURE;
 	if (load_xpm_file(mlx, map->path_texture_so, &map->texture_so))
 	{
 		mlx_destroy_image(mlx, map->texture_no);
-		return (EXIT_FAILURE);
+		status = EXIT_FAILURE;
 	}
 	if (load_xpm_file(mlx, map->path_texture_we, &map->texture_we))
 	{
 		mlx_destroy_image(mlx, map->texture_no);
 		mlx_destroy_image(mlx, map->texture_so);
-		return (EXIT_FAILURE);
+		status = EXIT_FAILURE;
 	}
 	if (load_xpm_file(mlx, map->path_texture_ea, &map->texture_ea))
 	{
 		mlx_destroy_image(mlx, map->texture_no);
 		mlx_destroy_image(mlx, map->texture_so);
 		mlx_destroy_image(mlx, map->texture_we);
-		return (EXIT_FAILURE);
+		status = EXIT_FAILURE;
 	}
-	return (EXIT_SUCCESS);
+	if (status == EXIT_FAILURE)
+		error("An error occurred while loading a texture");
+	return (status);
 }

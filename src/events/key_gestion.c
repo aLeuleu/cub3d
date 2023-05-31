@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:50:19 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 13:16:54 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 13:25:34 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	check_keycode_up(int keycode, t_display *display)
 
 int	check_mousecode(int mousecode, int x, int y, t_display *display)
 {
+	(void)mousecode;
 	(void)display;
 	(void)x;
 	(void)y;
-	printf("# define MOUSE_ %d\n", mousecode);
 	return (EXIT_SUCCESS);
 }

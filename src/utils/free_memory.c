@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:04:59 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 17:59:20 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:29:46 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	free_map(t_map *map)
 	free(map->path_texture_so);
 	free(map->path_texture_we);
 	free(map->path_texture_ea);
-	free(map->color_f);
-	free(map->color_c);
+	free(map->color_f_raw);
+	free(map->color_c_raw);
 	ft_free_tab(map->map);
 }
 
