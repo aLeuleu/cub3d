@@ -180,6 +180,7 @@ typedef struct s_map
 	char		**map;
 	int			height;
 	int			width;
+	int			zoom;
 }	t_map;
 
 // Player structure
@@ -206,6 +207,7 @@ typedef struct s_display
 	t_data		img;
 	t_map		map;
 	t_player	player;
+
 }	t_display;
 
 // Key events

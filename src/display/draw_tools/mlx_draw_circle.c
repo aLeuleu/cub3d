@@ -48,7 +48,9 @@ void mlx_draw_circle_oriented(t_display *display, int radius, double orientation
 		i++;
 		b.x = pos.x + cos(orientation) * i;
 		b.y = pos.y + sin(orientation) * i;
-		if (display->map.map[(int)b.y / 40][(int)b.x / 40] == '1')
+		if (((int)b.y / 40) < 0 || ((int)b.y / 40) >= display->map.height || ((int)b.x / 40) < 0 || ((int)b.x / 40) >= display->map.width)
+			collision = true;
+		else if (display->map.map[(int)b.y / 40][(int)b.x / 40] == '1')
 			collision = true;
 	}
 	mlx_draw_line(display, a, b, 0xFF1111);

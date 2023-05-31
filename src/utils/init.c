@@ -57,6 +57,7 @@ int	init_map_struct(t_display *display)
 	display->map.color_c = 0;
 	display->map.color_f = 0;
 	display->map.map = NULL;
+	display->map.zoom = 40;
 	return (EXIT_SUCCESS);
 }
 
