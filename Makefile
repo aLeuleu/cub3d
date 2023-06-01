@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/05/31 14:24:21 by lpupier          ###   ########.fr        #
+#    Updated: 2023/06/01 09:15:43 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRC_PARSING		=	${DIR_PARSING}parsing.c					\
 # Utils files
 SRC_UTILS		=	${DIR_UTILS}errors.c		\
 					${DIR_UTILS}init.c			\
-					${DIR_UTILS}free_memory.c
+					${DIR_UTILS}free_memory.c	\
+					${DIR_UTILS}utils.c
 
 # Events files
 SRC_EVENTS		=	${DIR_EVENTS}events.c			\
@@ -58,13 +59,15 @@ SRC_EVENTS		=	${DIR_EVENTS}events.c			\
 					${DIR_EVENTS}minimap_opening.c
 
 # Display files
-SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c \
-					${DIR_DISPLAY}render_frames.c \
-					${DIR_DISPLAY}draw_tools/mlx_draw_square.c \
-					${DIR_DISPLAY}draw_tools/mlx_draw_circle.c \
-					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c \
-					${DIR_DISPLAY}draw_tools/mlx_draw_line.c \
-					${DIR_DISPLAY}minimap/display_minimap.c \
+SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c				\
+					${DIR_DISPLAY}render_frames.c				\
+					${DIR_DISPLAY}draw_tools/mlx_draw_square.c	\
+					${DIR_DISPLAY}draw_tools/mlx_draw_circle.c	\
+					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c	\
+					${DIR_DISPLAY}draw_tools/mlx_draw_line.c	\
+					${DIR_DISPLAY}minimap/display_minimap.c		\
+					${DIR_DISPLAY}minimap/geometry_minimap.c	\
+					${DIR_DISPLAY}minimap/frame_minimap.c
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_player_position.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by alevra            #+#    #+#             */
-/*   Updated: 2023/05/29 17:56:37 by alevra           ###   ########.fr       */
+/*   Updated: 2023/05/31 18:16:06 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	get_player_orientation(t_player *player, const t_map *map);
 
-void	get_player_position(t_player *player, t_map *map)
+void	get_player_position(t_display *display)
 {
 	int pos_x;
 	int pos_y;
@@ -24,12 +24,12 @@ void	get_player_position(t_player *player, t_map *map)
 	i = 0;
 	pos_x = -1;
 	pos_y = -1;
-	while(i < map->height)
+	while(i < display->map.height)
 	{
 		j = 0;
-		while(j < map->width)
+		while(j < display->map.width)
 		{
-			if(ft_strchr( "NSEW", map->map[i][j]))
+			if(ft_strchr( "NSEW", display->map.map[i][j]))
 			{
 				pos_x = j;
 				pos_y = i;
@@ -41,9 +41,9 @@ void	get_player_position(t_player *player, t_map *map)
 	}
 	if (pos_x < 0 || pos_y < 0)
 		return ;
-	player->pos.x = pos_x;
-	player->pos.y = pos_y;
-	get_player_orientation(player, map);
+	display->player.pos.x = pos_x;
+	display->player.pos.y = pos_y;
+	get_player_orientation(&display->player, &display->map);
 }
 
 static void	get_player_orientation(t_player *player, const t_map *map)

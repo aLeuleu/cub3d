@@ -6,11 +6,20 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by alevra            #+#    #+#             */
-/*   Updated: 2023/05/29 16:32:03 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 09:30:50 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static double	offset_minimap(t_display * display, double point, double offset)
+{
+	double	result;
+
+	result = (point + offset) * display->map.zoom	\
+			+ (display->size_minimap / 2);
+	return (result);
+}
 
 void raycasting(t_display *display, int zoom);
 
@@ -18,34 +27,40 @@ void	display_minimap(t_display *display)
 {
 	int	line;
 	int	column;
-	int zoom;
-	int pos[2] = {0, 0};
+	t_p pos;
 
-	line = 0;
-	zoom = display->map.zoom;
-	while (line < display->map.height)
+	t_p	square;
+	square.x = 0;
+	square.y = 0;
+	mlx_draw_square_minimap(display, display->size_minimap + 1, square, BLACK);
+	line = -1;
+	while (++line < display->map.height)
 	{
 		column = 0;
 		while (column < display->map.width)
 		{
-			pos[0] = column * zoom;
-			pos[1] = line * zoom;
+			pos.x = offset_minimap(display, column, display->offset.x);
+			pos.y = offset_minimap(display, line, display->offset.y);
 			if (display->map.map[line][column] == '1')
-				mlx_draw_square(display, zoom, pos, 0xDDDD00);
+				mlx_draw_square_minimap(display, display->map.zoom, pos, DARK_BLUE);
+			else if (display->map.map[line][column] == '0' || ft_strchr("NSWE", display->map.map[line][column]))
+				mlx_draw_square_minimap(display, display->map.zoom, pos, LIGHT_BLUE);
 			column++;
 		}
-		line++;
 	}
-	draw_player(display, zoom);
+	draw_player(display, display->map.zoom);
+	draw_frame_minimap(display);
+	mlx_put_image_to_window(\
+		display->mlx, display->mlx_win, display->img_minimap.img, 0, 0);
 }
 
 void	draw_player(t_display *display, int zoom)
 {
 	t_p pos;
 
-	pos.x = display->player.pos.x * zoom;
-	pos.y = display->player.pos.y * zoom;
-	mlx_draw_circle_oriented(display, zoom / 2, display->player.orientation, 0xFF0000, pos);
+	pos.x = display->size_minimap / 2;
+	pos.y = display->size_minimap / 2;
+	mlx_draw_circle_player(display, zoom / 2, display->player.orientation, RED, pos);
 	mlx_draw_fov(display, zoom);
 	raycasting(display, zoom);
 }
@@ -62,9 +77,8 @@ void	mlx_draw_fov(t_display *display, int zoom)
 	a.y = pos.y + sin(display->player.orientation - M_PI / 6) * 100;
 	b.x = pos.x + cos(display->player.orientation + M_PI / 6) * 100;
 	b.y = pos.y + sin(display->player.orientation + M_PI / 6) * 100;
-	mlx_draw_line(display, pos, a, 0x0000FF);
-	mlx_draw_line(display, pos, b, 0x0000FF);
-
+	//mlx_draw_line(display, pos, a, BLUE);
+	//mlx_draw_line(display, pos, b, BLUE);
 }
 
 void raycasting(t_display *display, int zoom)
@@ -95,8 +109,6 @@ void raycasting(t_display *display, int zoom)
 			j++;
 		}
 		i += 0.01;
-		mlx_draw_line(display, pos, a, 0xFFFFFF);
+		//mlx_draw_line(display, pos, a, WHITE);
 	}
-
-
 }

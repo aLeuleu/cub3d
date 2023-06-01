@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 15:21:48 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 09:51:07 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,15 @@
 #  define MOUSE_UP 5
 # endif
 
-# define GAME 0
-# define MINIMAP 1
+# define BLACK		0x000000
+# define LIGHT_BLUE	0xBED0FF
+# define BLUE		0x0000FF
+# define DARK_BLUE	0x0037C9
+# define GREY		0x808080
+# define GREEN		0x008000
+# define PURPLE		0x800080
+# define RED		0xFF0000
+# define WHITE		0xFFFFFF
 
 // Point structure
 typedef struct s_p {
@@ -193,15 +200,18 @@ typedef struct s_display
 	void		*mlx_win;
 	int			height;
 	int			width;
+	int			size_minimap;
+	t_p			offset;
 	int			*keys;
 	int			display_mode;
 	t_data		img;
+	t_data		img_minimap;
 	t_map		map;
 	t_player	player;
 }	t_display;
 
 // Key events
-enum {
+enum e_key_events {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -209,6 +219,13 @@ enum {
 	ON_MOUSEMOVE = 6,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
+};
+
+// Map events
+enum e_map_events {
+	GAME,
+	MINIMAP,
+	MAP
 };
 
 // main.c
@@ -219,68 +236,56 @@ int		init_display_struct(t_display *display);
 int		init_map_struct(t_map *map);
 void	init_player(t_display *display);
 
-// parsing.c
+// parsing
 int		parsing(int argc, char **argv, t_display *display);
-
-// check_file_extention.c
 int		check_file_extention(char *file);
-
-// get_textures_colors.c
 int		get_textures_colors(int fd, t_map *map);
-
-// get_player_position.c
-void	get_player_position(t_player *player, t_map *map);
-
-// get_map.c
+void	get_player_position(t_display *display);
 int		get_map(int fd, t_map *map);
-
-// map_format.c
 int		map_is_formated(t_map *map);
-
-// load_colors.c
 int 	load_colors(t_map *map);
 
-// events.c
+// events
 int		quit_window(t_display *display);
-
-// minimap_opening.c
+int		display_coo_player(t_display *display);
 int		check_minimap_opening(t_display *display);
-
-// key_gestion.c
 int		check_keycode(int keycode, t_display *display);
 int		check_keycode_up(int keycode, t_display *display);
 int		check_mousecode(int moutsecode, int x, int y, t_display *display);
-
-// player_movements.c
 int		player_movements(t_display *display);
 
-// errors.c
+// utils
+t_p		init_point(int x, int y);
 void	error(char *str);
 void	bad_format_line(int idx);
 void	bad_format_tab(char *text, int line, int column);
-
-// load_textures.c
-int		load_textures(void *mlx, t_map *map);
-
-// render_frames.c
-int		render_frames(t_display *display);
-
-// free_memory.c
 void	free_map(t_map *map);
 void	free_images(t_display *display);
 
-// display_minimap.c
-void	display_minimap(t_display *display);
+// display
+int		load_textures(void *mlx, t_map *map);
+int		render_frames(t_display *display);
 
-//draw_tools
+// minimap
+void	display_minimap(t_display *display);
+void	my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color);
+void 	mlx_draw_square_minimap(t_display *display, int side_len, t_p pos, int color);
+void	mlx_draw_line_minimap(t_display *display, t_p a, t_p b, int color);
+void 	mlx_draw_circle_minimap(t_display *display, int radius, t_p pos, int color);
+void 	mlx_draw_circle_player(t_display *display, int radius, double orientation, int color, t_p pos);
+int		draw_frame_minimap(t_display *display);
+
+// draw_tools
 void	my_mlx_pixel_put(t_display *display, int x, int y, int color);
-void	mlx_draw_square(t_display *display, int side_len, int pos[2], int color);
+void 	mlx_draw_square(t_display *display, int side_len, t_p pos, int color);
 void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color);
 void	mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos);
+size_t	ft_max(size_t a, size_t b);
 void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
 
-//	player behavior
+// player behavior
 void	init_player(t_display *display);
 void	draw_player(t_display *display, int zoom);
 void	mlx_draw_fov(t_display *display, int zoom);
+
 #endif

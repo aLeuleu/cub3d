@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:04:48 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/29 16:25:58 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:12:08 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	parsing(int argc, char **argv, t_display *display)
 		return (EXIT_FAILURE);
 	if (get_map(fd, &display->map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	get_player_position(&display->player, &display->map);
+	get_player_position(display);
 	close(fd);
 	return (EXIT_SUCCESS);
 }

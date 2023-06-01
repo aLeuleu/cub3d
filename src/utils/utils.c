@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_draw_pixel.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 15:03:53 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 08:56:15 by lpupier          ###   ########.fr       */
+/*   Created: 2023/06/01 09:09:54 by lpupier           #+#    #+#             */
+/*   Updated: 2023/06/01 09:14:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_display *display, int x, int y, int color)
+t_p	init_point(int x, int y)
 {
-	char	*dst;
+	t_p	point;
 
-	if (x < 0 || y < 0 || x >= display->width || y >= display->height)
-		return ;
-	dst = display->img.addr \
-	+ (y * display->img.line_length \
-	+ x * (display->img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	point.x = x;
+	point.y = y;
+	return (point);
 }

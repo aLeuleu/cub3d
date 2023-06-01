@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_draw_circle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/05/29 15:37:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 08:57:06 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void mlx_draw_circle_oriented(t_display *display, int radius, double orientation
 		else if (display->map.map[(int)b.y / 40][(int)b.x / 40] == '1')
 			collision = true;
 	}
-	mlx_draw_line(display, a, b, 0xFF1111);
+	mlx_draw_line(display, a, b, WHITE);
 }
