@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:03:53 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 08:56:15 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:37:09 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	my_mlx_pixel_put(t_display *display, int x, int y, int color)
 	dst = display->img.addr \
 	+ (y * display->img.line_length \
 	+ x * (display->img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }

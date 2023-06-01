@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 09:51:07 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:26:24 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,13 +184,13 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_p		pos;
-	double 	orientation;
+	double	orientation;
 	double	fov;
-	double 	speed;
-	int 	score;
-	int 	life;
-	int 	max_life;
-	int 	score_to_win;
+	double	speed;
+	int		score;
+	int		life;
+	int		max_life;
+	int		score_to_win;
 }	t_player;
 
 // Display structure
@@ -243,12 +243,13 @@ int		get_textures_colors(int fd, t_map *map);
 void	get_player_position(t_display *display);
 int		get_map(int fd, t_map *map);
 int		map_is_formated(t_map *map);
-int 	load_colors(t_map *map);
+int		load_colors(t_map *map);
 
 // events
 int		quit_window(t_display *display);
 int		display_coo_player(t_display *display);
 int		check_minimap_opening(t_display *display);
+void	init_map_image(t_display *display);
 int		check_keycode(int keycode, t_display *display);
 int		check_keycode_up(int keycode, t_display *display);
 int		check_mousecode(int moutsecode, int x, int y, t_display *display);
@@ -269,17 +270,21 @@ int		render_frames(t_display *display);
 // minimap
 void	display_minimap(t_display *display);
 void	my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color);
-void 	mlx_draw_square_minimap(t_display *display, int side_len, t_p pos, int color);
+void	mlx_draw_square_minimap(\
+			t_display *display, int side_len, t_p pos, int color);
 void	mlx_draw_line_minimap(t_display *display, t_p a, t_p b, int color);
-void 	mlx_draw_circle_minimap(t_display *display, int radius, t_p pos, int color);
-void 	mlx_draw_circle_player(t_display *display, int radius, double orientation, int color, t_p pos);
+void	mlx_draw_circle_minimap(\
+			t_display *display, int radius, t_p pos, int color);
+void	mlx_draw_circle_player(t_display *display, int radius, \
+			double orientation, int color, t_p pos);
 int		draw_frame_minimap(t_display *display);
 
 // draw_tools
 void	my_mlx_pixel_put(t_display *display, int x, int y, int color);
-void 	mlx_draw_square(t_display *display, int side_len, t_p pos, int color);
+void	mlx_draw_square(t_display *display, int side_len, t_p pos, int color);
 void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color);
-void	mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos);
+void	mlx_draw_circle_oriented(t_display *display, int radius, \
+			double orientation, int color, t_p pos);
 size_t	ft_max(size_t a, size_t b);
 void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
 

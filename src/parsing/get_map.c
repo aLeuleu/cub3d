@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/30 15:06:29 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 11:20:35 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	init_map_arg(t_map *map, t_list_char *temp_map)
 	return (EXIT_SUCCESS);
 }
 
-static int	fill_temp_map(char *line, t_list_char **temp_map)
+static int	fill_temp_map(char *line, char line_idx, t_list_char **temp_map)
 {
 	t_list_char	*new;
 	int			idx;
@@ -57,7 +57,10 @@ static int	fill_temp_map(char *line, t_list_char **temp_map)
 		c = line[idx];
 		if (c != ' ' && c != '0' && c != '1' && c != '\n' \
 		&& c != 'N' && c != 'S' && c != 'W' && c != 'E')
-			return (EXIT_FAILURE);
+		{
+			return (bad_format_tab("The map has an unrecognized character", \
+			line_idx, idx + 1), EXIT_FAILURE);
+		}
 	}
 	new = (t_list_char *)ft_lstnew(ft_strdup(line));
 	if (!new)
@@ -122,9 +125,8 @@ int	get_map(int fd, t_map *map)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (fill_temp_map(line, &temp_map) == EXIT_FAILURE)
+		if (fill_temp_map(line, idx, &temp_map) == EXIT_FAILURE)
 		{
-			error("The game map is incorrectly formatted");
 			ft_lstclear((t_list **)&temp_map, free);
 			return (free(line), EXIT_FAILURE);
 		}

@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:32:12 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 19:02:12 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:26:56 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	display_coo_player(t_display *display)
 	free(coo_y);
 	if (!text_y)
 		return (free(text_x), EXIT_FAILURE);
-	mlx_string_put(display->mlx, display->mlx_win, 5, display->size_minimap + 22, WHITE, text_x);
-	mlx_string_put(display->mlx, display->mlx_win, 50, display->size_minimap + 22, WHITE, text_y);
-	free(text_x);
-	free(text_y);
-	return (EXIT_SUCCESS);
+	mlx_string_put(display->mlx, display->mlx_win, \
+		5, display->size_minimap + 22, WHITE, text_x);
+	mlx_string_put(display->mlx, display->mlx_win, \
+		50, display->size_minimap + 22, WHITE, text_y);
+	return (free(text_x), free(text_y), EXIT_SUCCESS);
 }

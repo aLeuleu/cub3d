@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 08:55:24 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 08:57:14 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:38:17 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color)
 	dst = display->img_minimap.addr \
 	+ (y * display->img_minimap.line_length \
 	+ x * (display->img_minimap.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-void mlx_draw_square_minimap(t_display *display, int side_len, t_p pos, int color)
+void	mlx_draw_square_minimap(t_display *display, int side_len, t_p pos, int color)
 {
 	int	i;
 	int	j;
@@ -65,7 +65,7 @@ void	mlx_draw_line_minimap(t_display *display, t_p a, t_p b, int color)
 	}
 }
 
-void mlx_draw_circle_minimap(t_display *display, int radius, t_p pos, int color)
+void	mlx_draw_circle_minimap(t_display *display, int radius, t_p pos, int color)
 {
 	int	i;
 	int	j;
@@ -84,16 +84,15 @@ void mlx_draw_circle_minimap(t_display *display, int radius, t_p pos, int color)
 	}
 }
 
-void mlx_draw_circle_player(t_display *display, int radius, double orientation, int color, t_p pos)
+void	mlx_draw_circle_player(t_display *display, int radius, double orientation, int color, t_p pos)
 {
-	t_p a;
-	t_p b;
+	t_p	a;
+	t_p	b;
 
 	mlx_draw_circle_minimap(display, radius, pos, color);
-	(void)orientation;
 	a.x = pos.x;
 	a.y = pos.y;
 	b.x = pos.x + cos(orientation) * radius * 2;
 	b.y = pos.y + sin(orientation) * radius * 2;
-	mlx_draw_line_minimap(display, a, b, WHITE);
+	mlx_draw_line_minimap(display, a, b, RED);
 }

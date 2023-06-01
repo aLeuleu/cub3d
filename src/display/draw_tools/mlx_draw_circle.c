@@ -6,13 +6,13 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/01 08:57:06 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:38:48 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void mlx_draw_circle(t_display *display, int radius, t_p pos, int color)
+void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color)
 {
 	int	i;
 	int	j;
@@ -31,12 +31,13 @@ void mlx_draw_circle(t_display *display, int radius, t_p pos, int color)
 	}
 }
 
-void mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos)
+void	mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos)
 {
-	bool collision = false;
-	t_p a;
-	t_p b;
+	bool	collision;
+	t_p		a;
+	t_p		b;
 
+	collision = false;
 	mlx_draw_circle(display, radius, pos, color);
 	(void)orientation;
 	a.x = pos.x;

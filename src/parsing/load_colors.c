@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:24:44 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:36:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:28:38 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	load_colors(t_map *map)
 {
 	char	**tab_color_f;
 	char	**tab_color_c;
-	
+
 	if (!map->color_f_raw || !map->color_c_raw)
 		return (error("The colors provided are not valid"), EXIT_FAILURE);
 	tab_color_f = ft_split(map->color_f_raw, ',');

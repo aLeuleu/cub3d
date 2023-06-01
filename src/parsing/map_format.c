@@ -6,13 +6,13 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:33:35 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 19:34:47 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:27:19 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_player_box(char box)
+int	is_player_box(char box)
 {
 	if (box == 'N' || box == 'S' || box == 'W' || box == 'E')
 		return (1);
