@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 13:59:37 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 16:55:13 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	init_display_struct(t_display *display)
 	idx = -1;
 	while (++idx < 256)
 		display->keys[idx] = 0;
-	display->width = 1200;
-	display->height = 800;
+	display->width = 1920;
+	display->height = 1080;
 	display->display_mode = GAME;
 	display->size_minimap = display->width / 9;
 	init_map_image(display);

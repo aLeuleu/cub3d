@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/05/31 13:34:11 by alevra           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:55:25 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,6 @@ bool check_collision(t_display *display, t_p start, t_p *i1, t_p *i2, double ang
 
 	mlx_draw_circle(display, 1, *i1, 0x0000ff); //debug
 	mlx_draw_circle(display, 1, *i2, 0x0000ff); //debug
-	printf("i1: [%2.f;%2.f]\n", i1->x, i1->y);
-	printf("angle : %f\n", angle);
 	if (i1->x < 0 || i1->x >= display->map.width || i1->y < 0 || i1->y >= display->map.height)
 		return (true);
 	if (i2->x < 0 || i2->x >= display->map.width || i2->y < 0 || i2->y >= display->map.height)
