@@ -127,6 +127,7 @@
 #  define KEY_RIGHT 124
 #  define KEY_UP 126
 #  define KEY_DOWN 125
+#  define KEY_ESCAPE 1234
 #  define MOUSE_LEFT 1
 #  define MOUSE_MIDDLE 2
 #  define MOUSE_RIGHT 3
@@ -298,5 +299,8 @@ void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
 void	init_player(t_display *display);
 void	draw_player(t_display *display, int zoom);
 void	mlx_draw_fov(t_display *display, int zoom);
+
+//display game
+void	display_game(t_display *display);
 
 #endif

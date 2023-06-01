@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+void minimap_raycasting(t_display *display, int zoom);
+
 static double	offset_minimap(t_display *display, double point, double offset)
 {
 	double	result;
@@ -110,7 +112,7 @@ void	display_minimap(t_display *display)
 		while (column < display->map.width)
 		{
 			if (display->display_mode == MINIMAP)
-			{	
+			{
 				pos.x = offset_minimap(display, column, display->offset.x);
 				pos.y = offset_minimap(display, line, display->offset.y);
 			}
@@ -118,7 +120,7 @@ void	display_minimap(t_display *display)
 			{
 				pos.x = column * display->map.zoom;
 				pos.y = line * display->map.zoom;
-			}	
+			}
 			if (display->map.map[line][column] == '1')
 				mlx_draw_square_minimap(display, display->map.zoom, pos, DARK_BLUE);
 			else if (display->map.map[line][column] == '0' || ft_strchr("NSWE", display->map.map[line][column]))
@@ -130,4 +132,37 @@ void	display_minimap(t_display *display)
 	draw_frame_minimap(display);
 	mlx_put_image_to_window(\
 		display->mlx, display->mlx_win, display->img_minimap.img, 0, 0);
+}
+
+void minimap_raycasting(t_display *display, int zoom)
+{
+	t_p pos;
+	t_p a;
+	double angle = M_PI / 6;
+	double i;
+	int	j;
+	bool collision;
+
+	pos.x = display->player.pos.x * zoom;
+	pos.y = display->player.pos.y * zoom;
+	i = -1;
+	while ( i < 1)
+	{
+		j = 1;
+		collision = false;
+		while (!collision)
+		{
+			a.x = pos.x + cos(display->player.orientation + angle * i) * j;
+			a.y = pos.y + sin(display->player.orientation + angle * i) * j;
+			if ((int)(a.y / zoom) < 0 || (int)(a.y / zoom) >= display->map.height
+				|| (int)(a.x / zoom) < 0 || (int)(a.x / zoom) >= display->map.width)
+				collision = true;
+			else if (display->map.map[(int)(a.y / zoom)][(int)(a.x / zoom)] == '1')
+				collision = true;
+			j++;
+			mlx_draw_circle(display, 1, a, 0x00FF00);
+		}
+		i += 0.01;
+		//mlx_draw_line(display, pos, a, WHITE);
+	}
 }

@@ -6,18 +6,18 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:56:09 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 14:33:48 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/05/31 15:22:03 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_wall(t_display *display, double pos_x, double pos_y)
+static int check_wall(t_display *display, double pos_x, double pos_y)
 {
-	t_p	a;
+	t_p a;
 
-	a.x = pos_x;
-	a.y = pos_y;
+	a.x = (pos_x);
+	a.y = (pos_y);
 	if (display->map.map[(int)(a.y)][(int)(a.x)] == '1')
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -25,8 +25,8 @@ static int	check_wall(t_display *display, double pos_x, double pos_y)
 
 int	player_movements(t_display *display)
 {
-	double	new_pos_x;
-	double	new_pos_y;
+	double new_pos_x;
+	double new_pos_y;
 
 	new_pos_x = display->player.pos.x;
 	new_pos_y = display->player.pos.y;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 /**
  * @brief Initialization function for member variables of the display structure.
@@ -30,8 +30,8 @@ int	init_display_struct(t_display *display)
 	idx = -1;
 	while (++idx < 256)
 		display->keys[idx] = 0;
-	display->width = 1920;
-	display->height = 1080;
+	display->width = 1200;
+	display->height = 800;
 	display->display_mode = GAME;
 	display->size_minimap = display->width / 9;
 	init_map_image(display);
