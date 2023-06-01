@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 13:26:24 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/01 14:25:54 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@
 #  define KEY_7 55
 #  define KEY_8 56
 #  define KEY_9 57
+#  define KEY_LEFT 254
+#  define KEY_RIGHT 255
 #  define KEY_SPACE 32
 #  define KEY_ESCAPE 65307
 #  define MOUSE_LEFT 1
@@ -254,6 +256,10 @@ int		check_keycode(int keycode, t_display *display);
 int		check_keycode_up(int keycode, t_display *display);
 int		check_mousecode(int moutsecode, int x, int y, t_display *display);
 int		player_movements(t_display *display);
+int		move_up(t_display *display, double *new_pos_x, double *new_pos_y);
+int		move_down(t_display *display, double *new_pos_x, double *new_pos_y);
+int		move_left(t_display *display, double *new_pos_x, double *new_pos_y);
+int		move_right(t_display *display, double *new_pos_x, double *new_pos_y);
 
 // utils
 t_p		init_point(int x, int y);
