@@ -51,7 +51,7 @@ static void	raycasting(t_display *display, int zoom)
 				collision = true;
 			j++;
 		}
-		i += 0.01;
+		i += 0.1;
 		if (display->display_mode == MAP)
 			mlx_draw_line_minimap(display, pos, a, WHITE);
 	}

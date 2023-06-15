@@ -127,7 +127,7 @@
 #  define KEY_RIGHT 124
 #  define KEY_UP 126
 #  define KEY_DOWN 125
-#  define KEY_ESCAPE 1234
+#  define KEY_ESCAPE 53
 #  define MOUSE_LEFT 1
 #  define MOUSE_MIDDLE 2
 #  define MOUSE_RIGHT 3
@@ -150,6 +150,7 @@ typedef struct s_p {
 	double		x;
 	double		y;
 	int			color;
+	bool		collision;
 }				t_p;
 
 // Data image structure
@@ -196,6 +197,29 @@ typedef struct s_player
 	int		score_to_win;
 }	t_player;
 
+// DEBUG
+typedef struct s_debug
+{
+	double ray_len;
+	double angle;
+	double new_angle;
+	double tan_angle;
+	double lin_len;
+	t_p 	collision;
+	int 	collision_type;
+	int		orientation;
+	t_p 	ix;
+	t_p 	iy;
+}	t_debug;
+
+// DEBUG
+typedef struct s_p_list
+{
+	t_p		*content;
+	t_list	*next;
+}	t_p_list;
+
+
 // Display structure
 typedef struct s_display
 {
@@ -211,6 +235,7 @@ typedef struct s_display
 	t_data		img_minimap;
 	t_map		map;
 	t_player	player;
+	t_debug		debug;
 }	t_display;
 
 // Key events
@@ -251,6 +276,7 @@ int		load_colors(t_map *map);
 // events
 int		quit_window(t_display *display);
 int		display_coo_player(t_display *display);
+int display_debug(t_display *display);
 int		check_minimap_opening(t_display *display);
 void	init_map_image(t_display *display);
 int		check_keycode(int keycode, t_display *display);
@@ -294,6 +320,7 @@ void	mlx_draw_circle_oriented(t_display *display, int radius, \
 			double orientation, int color, t_p pos);
 size_t	ft_max(size_t a, size_t b);
 void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
+void	mlx_draw_vertical_lines(t_display *display, t_p up, t_p down, int color);
 
 // player behavior
 void	init_player(t_display *display);

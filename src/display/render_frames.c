@@ -20,8 +20,8 @@ int	render_frames(t_display *display)
 	display->offset.x = -display->player.pos.x;
 	display->offset.y = -display->player.pos.y;
 	ft_memset(display->img.addr, 0, display->height * display->img.line_length);
-	int floor_color = 0x00FF00;
-	int skycolor = 0x0000FF;
+	int floor_color = 0xB3D89C ;
+	int skycolor = 0x4E6CE4;
 	if (display->display_mode == MINIMAP)
 	{
 		ft_memset(display->img.addr, 0, display->height * display->img.line_length);
@@ -40,7 +40,8 @@ int	render_frames(t_display *display)
 		ft_memset(display->img_minimap.addr, 0, \
 			display->size_minimap * display->size_minimap);
 		display_minimap(display);
-		display_coo_player(display);
+//		display_coo_player(display);
+		display_debug(display);
 	}
 	return (EXIT_SUCCESS);
 }

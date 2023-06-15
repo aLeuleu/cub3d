@@ -42,6 +42,11 @@ int	main(int argc, char **argv)
 	mlx_hook(display.mlx_win, 3, 1L << 1, check_keycode_up, &display);
 	mlx_hook(display.mlx_win, 6, 1L << 6, check_mousecode, &display);
 	mlx_hook(display.mlx_win, 17, 0, quit_window, &display);
+	//debug
+	display.player.orientation = 6.2831853071795862;
+	display.player.pos.x = 3.1;
+	display.player.pos.y = 1.8;
+	//debug
 	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);

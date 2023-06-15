@@ -26,7 +26,7 @@ int	quit_window(t_display *display)
 	return (EXIT_SUCCESS);
 }
 
-int	display_coo_player(t_display *display) //coordoonees
+int	display_coo_player(t_display *display)
 {
 	char	*text_x;
 	char	*text_y;

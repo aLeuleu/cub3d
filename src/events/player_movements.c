@@ -35,9 +35,9 @@ int	player_movements(t_display *display)
 	else if (display->player.orientation > 2 * M_PI)
 		display->player.orientation = 0;
 	if (display->keys[KEY_Q] || display->keys[KEY_LEFT])
-		display->player.orientation -= 0.1;
+		display->player.orientation -= 0.02;
 	else if (display->keys[KEY_E] || display->keys[KEY_RIGHT])
-		display->player.orientation += 0.1;
+		display->player.orientation += 0.02;
 	move_up(display, &new_pos_x, &new_pos_y);
 	move_down(display, &new_pos_x, &new_pos_y);
 	move_left(display, &new_pos_x, &new_pos_y);

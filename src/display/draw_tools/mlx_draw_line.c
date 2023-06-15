@@ -41,3 +41,16 @@ void	mlx_draw_line(t_display *display, t_p a, t_p b, int color)
 		i++;
 	}
 }
+
+void	mlx_draw_vertical_lines(t_display *display, t_p up, t_p down, int color)
+{
+
+	if (down.y < up.y)
+		return (mlx_draw_vertical_lines(display, down, up, color));
+
+	while (up.y <= down.y )
+	{
+		my_mlx_pixel_put(display, up.x, up.y, color);
+		up.y ++;
+	}
+}
