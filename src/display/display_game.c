@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 static bool find_collision(t_display *display, t_p *start, t_p *p_collision, double angle);
-static bool	check_collision(t_display *display, t_p p);
+static bool check_collision(t_display *display, t_p p, int orientation);
 		t_p 	farest_point(t_p start, t_p p1, t_p p2); // a mettre dans un bibli
 t_p 	closest_point(t_p start, t_p p1, t_p p2); // a mettre dans un bibli
 t_p 	add_points(t_p p1, t_p p2); // a mettre dans un bibli
@@ -43,30 +43,31 @@ void	display_game(t_display *display)
 	t_p p_collision;
 	double angle;
 	const double half_height = (double)display->height / 2;
-	const double one_on_width =  1/(double)display->width;
+	const double one_on_width =  2/((double)display->width);
 
 
 	i = -1;
 	while ( i <= 1)
 	{
+		if (display->debug.ray == count)
+			display->debug.ray = count;
 		start_pos = display->player.pos;
 		angle = display->player.orientation + (M_PI * i/ 6);
-//		angle = display->player.orientation;
+		if (angle < 0)
+			angle += 2 * M_PI;
+		else if (angle > 2 * M_PI)
+			angle -= 2 * M_PI;
 		p_collision = start_pos;
 		find_collision(display, &start_pos, &p_collision, angle);
 		ray_len = sqrt(pow(p_collision.x - display->player.pos.x, 2) + pow(p_collision.y - display->player.pos.y, 2));
-		display->debug.ray_len = ray_len;
-		display->debug.angle = angle;
-		display->debug.collision = p_collision;
+
 		lin_len = ray_len * cos(angle - display->player.orientation);
 		wall_height = (double)display->height/lin_len;
-//		(void)lin_len;
 		if (ray_len < 0.1)
 			ray_len = 0.1;
-//		wall_height = (double)display->height/ray_len;
 		if (wall_height > display->height)
 			wall_height = display->height;
-		wall_up.x = count++;
+		wall_up.x = count;
 		wall_up.y = half_height - (double)wall_height / 2;
 		wall_down.x = wall_up.x;
 		wall_down.y = half_height + (double)wall_height / 2;
@@ -74,11 +75,28 @@ void	display_game(t_display *display)
 			wall_color = wall_color_EW;
 		else
 			wall_color = wall_color_NS;
+		if (display->debug.ray == count)
+		{
+			t_p debug_up;
+			t_p debug_down;
+			display->debug.ray_len = ray_len;
+			display->debug.collision = p_collision;
+			display->debug.ix = display->debug.ix_tmp;
+			display->debug.iy = display->debug.iy_tmp;
+			display->debug.new_angle = display->debug.new_angle_tmp;
+			display->debug.angle = angle;
+			display->debug.tan_angle = display->debug.tan_angle_tmp;
+			debug_up.x = count;
+			debug_up.y = 0;
+			debug_down.x = count;
+			debug_down.y = half_height;
+			mlx_draw_vertical_lines(display, debug_up, debug_down, 0xFF0000);
+		}
 		mlx_draw_vertical_lines(display, wall_up, wall_down, wall_color);
 		i += one_on_width;
+		count++;
 	}
 }
-
 
 t_p 	add_points(t_p p1, t_p p2)
 {
@@ -120,22 +138,19 @@ t_p 	farest_point(t_p start, t_p p1, t_p p2)
 void angle_routine(t_display *display, double angle, double *tan_angle)
 {
 	if (angle < 0 || angle > M_PI / 2)
-		printf("ERROR\n");
-	display->debug.new_angle = angle;
+ 		printf("ERROR\n");
+	display->debug.new_angle_tmp = angle;
 	*tan_angle = tan(angle);
 	if (*tan_angle < 0)
 		*tan_angle *= -1;
-	display->debug.tan_angle = *tan_angle;
+	display->debug.tan_angle_tmp = *tan_angle;
 }
 
-bool	check_collision(t_display *display, t_p p)
+bool check_collision(t_display *display, t_p p, int orientation)
 {
-	double angle;
-
-	angle = display->player.orientation;
-	if (angle > M_PI_2 && angle < 3*M_PI_2 && (int)p.x == p.x)
+	if ((orientation == NW || orientation == SW)  && (int)p.x == p.x) // WEST
 		p.x -= 1;
-	if (angle > M_PI && angle < 2*M_PI && (int)p.y == p.y)
+	if ((orientation == NE || orientation == NW)  && (int)p.y == p.y) // NORTH
 		p.y -= 1;
 	if (p.x < 0 || p.x >= display->map.width || p.y < 0 || p.y >= display->map.height)
 		return (true);
@@ -161,7 +176,7 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 	iy.y = 0;
 	if (angle > 0 && angle < M_PI_2) // SE
 	{
-		display->debug.orientation = 1;
+		display->debug.orientation = SE;
 		angle_routine(display, angle, &tan_angle);
 
 		tmp = *start;
@@ -169,7 +184,7 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			ix.x = ((int)(tmp.x)) + 1;
 			ix.y = tmp.y + (ix.x - tmp.x) * tan_angle;
-			collisionx = check_collision(display, ix);
+			collisionx = check_collision(display, ix, SE);
 			tmp = ix;
 		}
 		tmp = *start;
@@ -177,13 +192,13 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			iy.y = ((int)(tmp.y)) + 1;
 			iy.x = tmp.x + (iy.y - tmp.y) / tan_angle;
-			collisiony = check_collision(display, iy);
+			collisiony = check_collision(display, iy, SE);
 			tmp = iy;
 		}
 	}
 	else if (angle > M_PI_2 && angle < M_PI) // SW
 	{
-		display->debug.orientation = 2;
+		display->debug.orientation = SW;
 		angle = M_PI - angle;
 		angle_routine(display, angle, &tan_angle);
 
@@ -192,7 +207,7 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			ix.x = (floor2(tmp.x));
 			ix.y = tmp.y + (tmp.x - ix.x) * tan_angle;
-			collisionx = check_collision(display, ix);
+			collisionx = check_collision(display, ix, SW);
 			tmp = ix;
 		}
 		tmp = *start;
@@ -200,13 +215,13 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			iy.y = ((int)(tmp.y)) + 1;
 			iy.x = tmp.x - (iy.y - tmp.y) / tan_angle;
-			collisiony = check_collision(display, iy);
+			collisiony = check_collision(display, iy, SW);
 			tmp = iy;
 		}
 	}
 	else if (angle > M_PI && angle < 3 * M_PI_2) // NW
 	{
-		display->debug.orientation = 3;
+		display->debug.orientation = NW;
 		angle = angle - M_PI;
 		angle_routine(display, angle, &tan_angle);
 
@@ -214,8 +229,8 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		while (!collisionx)
 		{
 			ix.x = (floor2(tmp.x));
-			ix.y = tmp.y + (tmp.x - ix.x) * tan_angle;
-			collisionx = check_collision(display, ix);
+			ix.y = tmp.y - (tmp.x - ix.x) * tan_angle;
+			collisionx = check_collision(display, ix, NW);
 			tmp = ix;
 		}
 		tmp = *start;
@@ -223,13 +238,13 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			iy.y = (floor2(tmp.y));
 			iy.x = tmp.x - (tmp.y - iy.y) / tan_angle;
-			collisiony = check_collision(display, iy);
+			collisiony = check_collision(display, iy, NW);
 			tmp = iy;
 		}
 	}
 	else if (angle > 3 * M_PI_2 && angle < two_pi) // NE
 	{
-		display->debug.orientation = 4;
+		display->debug.orientation = NE;
 		angle = two_pi - angle;
 		angle_routine(display, angle, &tan_angle);
 
@@ -238,7 +253,7 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			ix.x = (int)(tmp.x) + 1;
 			ix.y = tmp.y - (ix.x - tmp.x) * tan_angle;
-			collisionx = check_collision(display, ix);
+			collisionx = check_collision(display, ix, NE);
 			tmp = ix;
 		}
 		tmp = *start;
@@ -246,30 +261,30 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			iy.y = floor2(tmp.y);
 			iy.x = tmp.x + (tmp.y - iy.y) / tan_angle;
-			collisiony = check_collision(display, iy);
+			collisiony = check_collision(display, iy, NE);
 			tmp = iy;
 		}
 
 	}
 	else if (angle == 0 || angle == two_pi) //E
 	{
-		display->debug.orientation = 5;
-		display->debug.new_angle = angle;
+		display->debug.orientation = E;
+		display->debug.new_angle_tmp = angle;
 
 		tmp = *start;
 		while (!collisionx)
 		{
 			ix.x = (int)(tmp.x) + 1;
 			ix.y = tmp.y;
-			collisionx = check_collision(display, ix);
+			collisionx = check_collision(display, ix, E);
 			tmp = ix;
 		}
 		iy = ix;
 	}
 	else if (angle == M_PI_2) //S
 	{
-		display->debug.orientation = 6;
-		display->debug.new_angle = angle;
+		display->debug.orientation = S;
+		display->debug.new_angle_tmp = angle;
 
 		ix.x = 0;
 		ix.y = 0;
@@ -278,15 +293,15 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			iy.x = tmp.x;
 			iy.y = (int)(tmp.y) + 1;
-			collisiony = check_collision(display, iy);
+			collisiony = check_collision(display, iy, S);
 			tmp = iy;
 		}
 		ix = iy;
 	}
 	else if (angle == M_PI) //W
 	{
-		display->debug.orientation = 7;
-		display->debug.new_angle = angle;
+		display->debug.orientation = W;
+		display->debug.new_angle_tmp = angle;
 
 		ix.x = (floor2(start->x) );
 		ix.y = start->y;
@@ -294,20 +309,20 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		iy.x = 0;
 		iy.y = 0;
 		tmp = ix;
-		collisionx = check_collision(display, ix);
+		collisionx = check_collision(display, ix, W);
 		while (!collisionx)
 		{
 			ix.x = ((int) (tmp.x) - 1);
 			ix.y = tmp.y;
-			collisionx = check_collision(display, ix);
+			collisionx = check_collision(display, ix, W);
 			tmp = ix;
 		}
 		iy = ix;
 	}
 	else if (angle == 3 * M_PI_2) //N
 	{
-		display->debug.orientation = 8;
-		display->debug.new_angle = angle;
+		display->debug.orientation = N;
+		display->debug.new_angle_tmp = angle;
 
 		iy.x = start->x;
 		iy.y = floor2(start->y);
@@ -316,7 +331,7 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		{
 			iy.x = tmp.x;
 			iy.y = (int)(tmp.y) - 1;
-			collisiony = check_collision(display, iy);
+			collisiony = check_collision(display, iy, N);
 			tmp = iy;
 		}
 		ix = iy;
@@ -328,18 +343,22 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision, double ang
 		iy.x = 0;
 		iy.y = 0;
 	}
-	display->debug.ix = ix;
-	display->debug.iy = iy;
+	display->debug.ix_tmp = ix;
+	display->debug.iy_tmp = iy;
 	display->debug.collision_type = 0;
-	if (!(ix.x < 0 || ix.x >= display->map.width || ix.y < 0 || ix.y >= display->map.height))
+	ix.collision = true;
+	iy.collision = true;
+	if (ix.x < 0 || ix.x >= display->map.width || ix.y < 0 || ix.y >= display->map.height)
 	{
-		if (display->map.map[(int)(ix.y)][(int)(ix.x)] == '1')
-			ix.collision = true;
+		ix.collision = false;
+//		if (display->map.map[(int)(ix.y)][(int)(ix.x)] == '1')
+//			ix.collision = true;
 	}
-	if (!(iy.x < 0 || iy.x >= display->map.width || iy.y < 0 || iy.y >= display->map.height))
+	if (iy.x < 0 || iy.x >= display->map.width || iy.y < 0 || iy.y >= display->map.height)
 	{
-		if (display->map.map[(int)(iy.y)][(int)(iy.x)] == '1')
-			iy.collision = true;
+		iy.collision = false; //tester ca
+//		if (display->map.map[(int)(iy.y)][(int)(iy.x)] == '1')
+//			iy.collision = true;
 	}
 	if (ix.collision && iy.collision)
 	{
@@ -423,21 +442,21 @@ int display_debug(t_display *display) //debug, do not send this to vogsphere
 
 	char *orientation_txt;
 
-	if (display->debug.orientation == 1)
+	if (display->debug.orientation == SE)
 		orientation_txt = ft_strdup("orientation : SE");
-	else if (display->debug.orientation == 2)
+	else if (display->debug.orientation == SW)
 		orientation_txt = ft_strdup("orientation : SW");
-	else if (display->debug.orientation == 3)
+	else if (display->debug.orientation == NW)
 		orientation_txt = ft_strdup("orientation : NW");
-	else if (display->debug.orientation == 4)
+	else if (display->debug.orientation == NE)
 		orientation_txt = ft_strdup("orientation : NE");
-	else if (display->debug.orientation == 5)
+	else if (display->debug.orientation == E)
 		orientation_txt = ft_strdup("orientation : E");
-	else if (display->debug.orientation == 6)
+	else if (display->debug.orientation == S)
 		orientation_txt = ft_strdup("orientation : S");
-	else if (display->debug.orientation == 7)
+	else if (display->debug.orientation == W)
 		orientation_txt = ft_strdup("orientation : W");
-	else if (display->debug.orientation == 8)
+	else if (display->debug.orientation == N)
 		orientation_txt = ft_strdup("orientation : N");
 	else
 		orientation_txt = ft_strdup("orientation : 0");

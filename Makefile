@@ -32,6 +32,7 @@ DIR_PARSING		=	${DIR_SRC}parsing/
 DIR_UTILS		=	${DIR_SRC}utils/
 DIR_DISPLAY		=	${DIR_SRC}display/
 DIR_EVENTS		=	${DIR_SRC}events/
+DIR_DEBUG		=	${DIR_SRC}debug/
 
 # Headers files
 HEADER			=	${DIR_HEADER}cub3d.h	\
@@ -69,14 +70,18 @@ SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c				\
 					${DIR_DISPLAY}draw_tools/mlx_draw_line.c	\
 					${DIR_DISPLAY}minimap/display_minimap.c		\
 					${DIR_DISPLAY}minimap/geometry_minimap.c	\
-					${DIR_DISPLAY}minimap/frame_minimap.c
+					${DIR_DISPLAY}minimap/frame_minimap.c		\
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\
 					${SRC_PARSING}		\
 					${SRC_UTILS}		\
 					${SRC_DISPLAY}		\
-					${SRC_EVENTS}
+					${SRC_EVENTS}		\
+					${SRC_DEBUG}
+
+# Debug files
+SRC_DEBUG		=	${DIR_DEBUG}debug_ray.c
 
 # Objects
 OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}

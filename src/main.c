@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	display.player.orientation = 6.2831853071795862;
 	display.player.pos.x = 3.1;
 	display.player.pos.y = 1.8;
+	display.debug.ray = 0;
 	//debug
 	mlx_loop_hook(display.mlx, render_frames, &display);
 	mlx_loop(display.mlx);

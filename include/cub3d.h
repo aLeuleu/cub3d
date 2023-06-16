@@ -202,14 +202,19 @@ typedef struct s_debug
 {
 	double ray_len;
 	double angle;
+	double new_angle_tmp;
 	double new_angle;
 	double tan_angle;
+	double tan_angle_tmp;
 	double lin_len;
 	t_p 	collision;
 	int 	collision_type;
 	int		orientation;
 	t_p 	ix;
+	t_p 	ix_tmp;
+	t_p 	iy_tmp;
 	t_p 	iy;
+	int 	ray;
 }	t_debug;
 
 // DEBUG
@@ -219,6 +224,18 @@ typedef struct s_p_list
 	t_list	*next;
 }	t_p_list;
 
+
+//making an enum for NORTH SOUTH EAST WEST
+enum e_direction {
+	N = 0,
+	S = 1,
+	E = 2,
+	W = 3,
+	NE = 4,
+	NW = 5,
+	SE = 6,
+	SW = 7
+};
 
 // Display structure
 typedef struct s_display
@@ -276,7 +293,7 @@ int		load_colors(t_map *map);
 // events
 int		quit_window(t_display *display);
 int		display_coo_player(t_display *display);
-int display_debug(t_display *display);
+int 	display_debug(t_display *display);
 int		check_minimap_opening(t_display *display);
 void	init_map_image(t_display *display);
 int		check_keycode(int keycode, t_display *display);
@@ -329,5 +346,8 @@ void	mlx_draw_fov(t_display *display, int zoom);
 
 //display game
 void	display_game(t_display *display);
+
+//debug
+void	debug_ray(t_display *display);
 
 #endif
