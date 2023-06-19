@@ -6,25 +6,11 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/19 14:30:11 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 19:07:49 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	mlx_draw_fov(t_display *display, int zoom)
-{
-	t_p	pos;
-	t_p	a;
-	t_p	b;
-
-	pos.x = display->player.pos.x * zoom;
-	pos.y = display->player.pos.y * zoom;
-	a.x = pos.x + cos(display->player.orientation - M_PI / 6) * 100;
-	a.y = pos.y + sin(display->player.orientation - M_PI / 6) * 100;
-	b.x = pos.x + cos(display->player.orientation + M_PI / 6) * 100;
-	b.y = pos.y + sin(display->player.orientation + M_PI / 6) * 100;
-}
 
 static void	draw_player(t_display *display, int zoom)
 {
@@ -42,7 +28,6 @@ static void	draw_player(t_display *display, int zoom)
 	}
 	mlx_draw_circle_player(display, zoom / 2, \
 		display->player.orientation, 0x3d4839, pos);
-	mlx_draw_fov(display, zoom);
 }
 
 static void	minimap_style(t_display *display, int line, int column, t_p pos)

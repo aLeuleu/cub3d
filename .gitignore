@@ -3,4 +3,5 @@
 .vscode/
 .obj/
 cub3d
+cub3D
 *.cub
