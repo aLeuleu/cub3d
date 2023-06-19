@@ -6,15 +6,15 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:15:27 by lpupier           #+#    #+#              #
-#    Updated: 2023/06/01 13:57:20 by lpupier          ###   ########.fr        #
+#    Updated: 2023/06/19 15:08:54 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Constants
-NAME			=	cub3d
+NAME			=	cub3D
 CC				=	cc
 RM				=	rm -rf
-FLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -g3 -o2 #-fsanitize=address
 FLAGS_MATH		=	-lm
 
 # Libft support
@@ -32,7 +32,6 @@ DIR_PARSING		=	${DIR_SRC}parsing/
 DIR_UTILS		=	${DIR_SRC}utils/
 DIR_DISPLAY		=	${DIR_SRC}display/
 DIR_EVENTS		=	${DIR_SRC}events/
-DIR_DEBUG		=	${DIR_SRC}debug/
 
 # Headers files
 HEADER			=	${DIR_HEADER}cub3d.h	\
@@ -71,6 +70,7 @@ SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c				\
 					${DIR_DISPLAY}minimap/display_minimap.c		\
 					${DIR_DISPLAY}minimap/geometry_minimap.c	\
 					${DIR_DISPLAY}minimap/frame_minimap.c		\
+					${DIR_DISPLAY}textures/display_textures.c
 
 # Sources files
 SRC				=	${DIR_SRC}main.c	\
@@ -79,9 +79,6 @@ SRC				=	${DIR_SRC}main.c	\
 					${SRC_DISPLAY}		\
 					${SRC_EVENTS}		\
 					${SRC_DEBUG}
-
-# Debug files
-SRC_DEBUG		=	${DIR_DEBUG}debug_ray.c
 
 # Objects
 OBJ				=	${patsubst %.c, ${DIR_OBJ}%.o, ${SRC}}

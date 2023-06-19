@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/01 13:38:48 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:15:55 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,26 @@ void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color)
 	}
 }
 
-void	mlx_draw_circle_oriented(t_display *display, int radius, double orientation, int color, t_p pos)
+void	mlx_draw_circle_oriented(t_display *display, int radius, \
+			double orientation, int color, t_p pos)
 {
 	bool	collision;
 	t_p		a;
 	t_p		b;
+	int		i;
 
 	collision = false;
 	mlx_draw_circle(display, radius, pos, color);
-	(void)orientation;
 	a.x = pos.x;
 	a.y = pos.y;
-
-	int i = 0;
+	i = 0;
 	while (!collision)
 	{
 		i++;
 		b.x = pos.x + cos(orientation) * i;
 		b.y = pos.y + sin(orientation) * i;
-		if (((int)b.y / 40) < 0 || ((int)b.y / 40) >= display->map.height || ((int)b.x / 40) < 0 || ((int)b.x / 40) >= display->map.width)
+		if (((int)b.y / 40) < 0 || ((int)b.y / 40) >= display->map.height \
+		|| ((int)b.x / 40) < 0 || ((int)b.x / 40) >= display->map.width)
 			collision = true;
 		else if (display->map.map[(int)b.y / 40][(int)b.x / 40] == '1')
 			collision = true;

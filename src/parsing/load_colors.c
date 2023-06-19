@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:24:44 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 13:28:38 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/02 13:10:31 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ static int	is_valid_values(char **tab)
 	return (EXIT_SUCCESS);
 }
 
-static int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
 static int	create_color_value(char **tab)
 {
 	int	color;
 
 	color = create_trgb(255, ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
 	return (color);
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 int	load_colors(t_map *map)

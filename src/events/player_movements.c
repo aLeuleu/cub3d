@@ -6,15 +6,15 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:56:09 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 15:22:03 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:12:09 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int check_wall(t_display *display, double pos_x, double pos_y)
+static int	check_wall(t_display *display, double pos_x, double pos_y)
 {
-	t_p a;
+	t_p	a;
 
 	a.x = (pos_x);
 	a.y = (pos_y);
@@ -25,8 +25,8 @@ static int check_wall(t_display *display, double pos_x, double pos_y)
 
 int	player_movements(t_display *display)
 {
-	double new_pos_x;
-	double new_pos_y;
+	double	new_pos_x;
+	double	new_pos_y;
 
 	new_pos_x = display->player.pos.x;
 	new_pos_y = display->player.pos.y;
@@ -42,9 +42,6 @@ int	player_movements(t_display *display)
 	move_down(display, &new_pos_x, &new_pos_y);
 	move_left(display, &new_pos_x, &new_pos_y);
 	move_right(display, &new_pos_x, &new_pos_y);
-	//debug
-	debug_ray(display);
-	//end debug
 	if (check_wall(display, new_pos_x, new_pos_y) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	display->player.pos.x = new_pos_x;

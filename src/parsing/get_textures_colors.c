@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:43:35 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 13:21:37 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:36:36 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,6 @@ static char	**split_name_value(char *line)
 	return (tab);
 }
 
-/**
- * @brief The purpose of the function is to retrieve the path of the textures
- * and the color of the ceiling & floor of the map.
- * 
- * @param fd FD of the map file
- * @param map Overall structure of the map (see include/cub3d.h)
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
 int	get_textures_colors(int fd, t_map *map)
 {
 	int		idx;

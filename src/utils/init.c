@@ -6,30 +6,29 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 16:55:13 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:33:19 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/**
- * @brief Initialization function for member variables of the display structure.
- * 
- * @param display General structure for screen display (see include/cub3d.h)
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
-int	init_display_struct(t_display *display)
+static void	init_keys(t_display *display)
 {
 	int	idx;
 
+	idx = -1;
+	while (++idx < 256)
+		display->keys[idx] = 0;
+}
+
+int	init_display_struct(t_display *display)
+{
 	display->mlx = mlx_init();
 	display->mlx_win = NULL;
 	display->keys = malloc(sizeof(int) * 256);
 	if (!display->keys)
 		return (EXIT_FAILURE);
-	idx = -1;
-	while (++idx < 256)
-		display->keys[idx] = 0;
+	init_keys(display);
 	display->width = 1500;
 	display->height = 1000;
 	display->display_mode = GAME;
@@ -44,16 +43,9 @@ int	init_display_struct(t_display *display)
 		&display->img.bits_per_pixel, \
 		&display->img.line_length, \
 		&display->img.endian);
-	display->img_minimap.img = NULL;
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief Initialization function for member variables of the map structure.
- * 
- * @param display General structure for screen display (see include/cub3d.h)
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
 int	init_map_struct(t_map *map)
 {
 	map->nb_parameter_set = 0;
@@ -61,10 +53,10 @@ int	init_map_struct(t_map *map)
 	map->path_texture_so = NULL;
 	map->path_texture_we = NULL;
 	map->path_texture_ea = NULL;
-	map->texture_no = NULL;
-	map->texture_so = NULL;
-	map->texture_we = NULL;
-	map->texture_ea = NULL;
+	map->texture_no.img = NULL;
+	map->texture_so.img = NULL;
+	map->texture_we.img = NULL;
+	map->texture_ea.img = NULL;
 	map->color_c_raw = NULL;
 	map->color_f_raw = NULL;
 	map->color_c = 0;

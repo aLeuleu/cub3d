@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:27:32 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 11:20:35 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:42:50 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ static int	fill_map(t_map *map, t_list_char *temp_map)
 	int			len;
 	int			idx;
 
-	if (init_map_arg(map, temp_map) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
 	temp = temp_map;
 	len = -1;
 	while (temp)
@@ -102,15 +100,6 @@ static int	fill_map(t_map *map, t_list_char *temp_map)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief The purpose of the function is to retrieve the floor, walls,
- * player position of the map.
- * 
- * @param fd The file descriptor of the file being read.
- * @param map Overall structure of the map (see include/cub3d.h)
- * 
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
 int	get_map(int fd, t_map *map)
 {
 	int			idx;
@@ -132,6 +121,8 @@ int	get_map(int fd, t_map *map)
 		}
 		free(line);
 	}
+	if (init_map_arg(map, temp_map) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	fill_map(map, temp_map);
 	ft_lstclear((t_list **)&temp_map, free);
 	return (EXIT_SUCCESS);

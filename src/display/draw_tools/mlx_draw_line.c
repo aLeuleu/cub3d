@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/01 08:59:32 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:14:42 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ void	mlx_draw_line(t_display *display, t_p a, t_p b, int color)
 
 void	mlx_draw_vertical_lines(t_display *display, t_p up, t_p down, int color)
 {
-
 	if (down.y < up.y)
 		return (mlx_draw_vertical_lines(display, down, up, color));
-
-	while (up.y <= down.y )
+	while (up.y <= down.y)
 	{
 		my_mlx_pixel_put(display, up.x, up.y, color);
 		up.y ++;

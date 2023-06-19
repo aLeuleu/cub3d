@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/01 14:25:54 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:54:22 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,15 +135,19 @@
 #  define MOUSE_UP 5
 # endif
 
-# define BLACK		0x000000
-# define LIGHT_BLUE	0xBED0FF
-# define BLUE		0x0000FF
-# define DARK_BLUE	0x0037C9
-# define GREY		0x808080
-# define GREEN		0x008000
-# define PURPLE		0x800080
-# define RED		0xFF0000
-# define WHITE		0xFFFFFF
+# define BLACK			0x000000
+# define LIGHT_BLUE		0xBED0FF
+# define BLUE			0x0000FF
+# define DARK_BLUE		0x0037C9
+# define GREY			0x808080
+# define LIGHT_GREEN	0x83957d
+# define GREEN			0x008000
+# define DARK_GREEN		0x396f28
+# define PURPLE			0x800080
+# define RED			0xFF0000
+# define WHITE			0xFFFFFF
+
+# define IMG_SIZE	64
 
 // Point structure
 typedef struct s_p {
@@ -170,10 +174,10 @@ typedef struct s_map
 	char		*path_texture_so;
 	char		*path_texture_we;
 	char		*path_texture_ea;
-	void		*texture_no;
-	void		*texture_so;
-	void		*texture_we;
-	void		*texture_ea;
+	t_data		texture_no;
+	t_data		texture_so;
+	t_data		texture_we;
+	t_data		texture_ea;
 	char		*color_f_raw;
 	char		*color_c_raw;
 	int			color_f;
@@ -197,33 +201,11 @@ typedef struct s_player
 	int		score_to_win;
 }	t_player;
 
-// DEBUG
-typedef struct s_debug
-{
-	double ray_len;
-	double angle;
-	double new_angle_tmp;
-	double new_angle;
-	double tan_angle;
-	double tan_angle_tmp;
-	double lin_len;
-	t_p 	collision;
-	int 	collision_type;
-	int		orientation;
-	t_p 	ix;
-	t_p 	ix_tmp;
-	t_p 	iy_tmp;
-	t_p 	iy;
-	int 	ray;
-}	t_debug;
-
-// DEBUG
 typedef struct s_p_list
 {
 	t_p		*content;
 	t_list	*next;
 }	t_p_list;
-
 
 //making an enum for NORTH SOUTH EAST WEST
 enum e_direction {
@@ -248,11 +230,10 @@ typedef struct s_display
 	t_p			offset;
 	int			*keys;
 	int			display_mode;
+	double		ray_len;
 	t_data		img;
-	t_data		img_minimap;
 	t_map		map;
 	t_player	player;
-	t_debug		debug;
 }	t_display;
 
 // Key events
@@ -288,17 +269,18 @@ int		get_textures_colors(int fd, t_map *map);
 void	get_player_position(t_display *display);
 int		get_map(int fd, t_map *map);
 int		map_is_formated(t_map *map);
+int		create_trgb(int t, int r, int g, int b);
 int		load_colors(t_map *map);
 
 // events
 int		quit_window(t_display *display);
 int		display_coo_player(t_display *display);
-int 	display_debug(t_display *display);
+int		display_debug(t_display *display);
 int		check_minimap_opening(t_display *display);
 void	init_map_image(t_display *display);
 int		check_keycode(int keycode, t_display *display);
 int		check_keycode_up(int keycode, t_display *display);
-int		check_mousecode(int moutsecode, int x, int y, t_display *display);
+int		check_mousecode(int x, int y, t_display *display);
 int		player_movements(t_display *display);
 int		move_up(t_display *display, double *new_pos_x, double *new_pos_y);
 int		move_down(t_display *display, double *new_pos_x, double *new_pos_y);
@@ -322,12 +304,15 @@ void	display_minimap(t_display *display);
 void	my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color);
 void	mlx_draw_square_minimap(\
 			t_display *display, int side_len, t_p pos, int color);
-void	mlx_draw_line_minimap(t_display *display, t_p a, t_p b, int color);
 void	mlx_draw_circle_minimap(\
 			t_display *display, int radius, t_p pos, int color);
 void	mlx_draw_circle_player(t_display *display, int radius, \
 			double orientation, int color, t_p pos);
+double	offset_minimap(t_display *display, double point, double offset);
 int		draw_frame_minimap(t_display *display);
+
+// textures
+bool	display_textures(t_display *display, t_p w_up, t_p w_down, t_p p_col);
 
 // draw_tools
 void	my_mlx_pixel_put(t_display *display, int x, int y, int color);
@@ -337,17 +322,13 @@ void	mlx_draw_circle_oriented(t_display *display, int radius, \
 			double orientation, int color, t_p pos);
 size_t	ft_max(size_t a, size_t b);
 void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
-void	mlx_draw_vertical_lines(t_display *display, t_p up, t_p down, int color);
+void	mlx_draw_vertical_lines(t_display *display, \
+			t_p up, t_p down, int color);
 
 // player behavior
 void	init_player(t_display *display);
-void	draw_player(t_display *display, int zoom);
-void	mlx_draw_fov(t_display *display, int zoom);
 
 //display game
 void	display_game(t_display *display);
-
-//debug
-void	debug_ray(t_display *display);
 
 #endif
