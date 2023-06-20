@@ -6,21 +6,12 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:04:48 by lpupier           #+#    #+#             */
-/*   Updated: 2023/05/31 18:12:08 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:10:53 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-/**
- * @brief Map file parsing function with recognition
- * of textures, colors and the game map.
- * 
- * @param argc Number of parameters passed to the execution of the program.
- * @param argv Arguments passed to the execution of the program.
- * @param display General structure for screen display (see include/cub3d.h)
- * @return (int) Returns EXIT_SUCCESS or EXIT_FAILURE
- */
 int	parsing(int argc, char **argv, t_display *display)
 {
 	char	*file;
