@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:24:44 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/02 13:10:31 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/20 16:25:23 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,18 @@ static int	is_valid_values(char **tab)
 
 static int	create_color_value(char **tab)
 {
-	int	color;
+	int		color;
+	char	*value1;
+	char	*value2;
+	char	*value3;
 
-	color = create_trgb(255, ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+	value1 = ft_strtrim(tab[0], " \n");
+	value2 = ft_strtrim(tab[1], " \n");
+	value3 = ft_strtrim(tab[2], " \n");
+	color = create_trgb(255, ft_atoi(value1), ft_atoi(value2), ft_atoi(value3));
+	free(value1);
+	free(value2);
+	free(value3);
 	return (color);
 }
 
