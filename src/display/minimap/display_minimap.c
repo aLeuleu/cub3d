@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/19 19:07:49 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/20 16:30:32 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	display_minimap(t_display *display)
 	column = 0;
 	pos.x = 0;
 	pos.y = 0;
+	display->map.zoom = 7 * display->width / 1280;
 	minimap_style(display, line, column, pos);
 	draw_player(display, display->map.zoom);
 	if (display->display_mode == MINIMAP)
