@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:24:44 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/20 16:25:23 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:08:48 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	is_valid_values(char **tab)
 	idx = -1;
 	while (++idx < 3)
 	{
-		str_trimed = ft_strtrim(tab[idx], " \n");
+		str_trimed = ft_strtrim(tab[idx], " \t\n");
 		number = ft_atoi(str_trimed);
 		free(str_trimed);
 		if (number < 0 || number > 255)
@@ -41,9 +41,9 @@ static int	create_color_value(char **tab)
 	char	*value2;
 	char	*value3;
 
-	value1 = ft_strtrim(tab[0], " \n");
-	value2 = ft_strtrim(tab[1], " \n");
-	value3 = ft_strtrim(tab[2], " \n");
+	value1 = ft_strtrim(tab[0], " \t\n");
+	value2 = ft_strtrim(tab[1], " \t\n");
+	value3 = ft_strtrim(tab[2], " \t\n");
 	color = create_trgb(255, ft_atoi(value1), ft_atoi(value2), ft_atoi(value3));
 	free(value1);
 	free(value2);

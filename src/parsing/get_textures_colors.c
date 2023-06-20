@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:43:35 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/19 13:36:36 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:08:38 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_str_empty(char *line)
 	int	idx;
 
 	idx = 0;
-	while (line[idx] == ' ' || line[idx] == '\n')
+	while (line[idx] == ' ' || line[idx] == '\t' || line[idx] == '\n')
 		idx++;
 	if (!line[idx])
 		return (EXIT_SUCCESS);
@@ -56,10 +56,10 @@ static char	**split_name_value(char *line)
 	char	**tab;
 
 	idx = 0;
-	while (line[idx] && line[idx] != ' ')
+	while (line[idx] && line[idx] != ' ' && line[idx] != '\t')
 		idx++;
 	name = ft_substr(line, 0, idx);
-	while (line[idx] && line[idx] == ' ')
+	while (line[idx] && line[idx] == ' ' && line[idx] != '\t')
 		idx++;
 	value = ft_substr(line, idx, ft_strlen(line) - idx);
 	if (!name || !value)
@@ -67,8 +67,8 @@ static char	**split_name_value(char *line)
 	tab = malloc(sizeof(char **) * 3);
 	if (!tab)
 		return (NULL);
-	tab[0] = ft_strtrim(name, " \n");
-	tab[1] = ft_strtrim(value, " \n");
+	tab[0] = ft_strtrim(name, " \t\n");
+	tab[1] = ft_strtrim(value, " \t\n");
 	tab[2] = NULL;
 	free(name);
 	free(value);
