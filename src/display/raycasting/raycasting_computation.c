@@ -6,16 +6,17 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/19 14:57:39 by alevra           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:06:08 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	compute_cardinal_collision(t_p *point, t_display *display, int orientation)
+void	compute_cardinal_collision(t_p *point, t_display *display,
+		int orientation)
 {
-	t_p	tmp;
-	bool collision;
+	t_p		tmp;
+	bool	collision;
 
 	tmp = display->player.pos;
 	collision = false;
@@ -34,7 +35,8 @@ void	compute_cardinal_collision(t_p *point, t_display *display, int orientation)
 	}
 }
 
-void	compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, double angle)
+void	compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display,
+		double angle)
 {
 	int		orientation;
 	double	tan_angle;
@@ -55,10 +57,11 @@ void	compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, doubl
 	iy->collision = true;
 }
 
-void	compute_x_points_untill_collision(t_p *point, const double *tan_angle, t_display *display, int orientation)
+void	compute_x_points_untill_collision(t_p *point, const double *tan_angle,
+		t_display *display, int orientation)
 {
-	t_p	tmp;
-	bool collision;
+	t_p		tmp;
+	bool	collision;
 
 	tmp = display->player.pos;
 	collision = false;
@@ -81,10 +84,11 @@ void	compute_x_points_untill_collision(t_p *point, const double *tan_angle, t_di
 	}
 }
 
-void	compute_y_points_untill_collision(t_p *point, const double *tan_angle, t_display *display, int orientation)
+void	compute_y_points_untill_collision(t_p *point, const double *tan_angle,
+		t_display *display, int orientation)
 {
-	t_p	tmp;
-	bool collision;
+	t_p		tmp;
+	bool	collision;
 
 	tmp = display->player.pos;
 	collision = false;

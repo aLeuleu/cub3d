@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/19 14:57:39 by alevra           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:06:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	adjust_angle(double *angle)
 
 void	angle_routine(double angle, double *tan_angle, int orientation)
 {
-	if (orientation == NE )
+	if (orientation == NE)
 		angle = TWO_PI - angle;
 	else if (orientation == SW)
 		angle = M_PI - angle;
-	else if (orientation == NW )
+	else if (orientation == NW)
 		angle = angle - M_PI;
-	else if(orientation == SE)
+	else if (orientation == SE)
 		angle = 2 * M_PI - angle;
 	if (angle < 0 || angle > M_PI / 2)
 		printf("ERROR\n");
@@ -39,11 +39,12 @@ void	angle_routine(double angle, double *tan_angle, int orientation)
 
 bool	check_collision(t_display *display, t_p p, int orientation)
 {
-	if ((orientation == NW || orientation == SW)  && (int)p.x == p.x) // WEST
+	if ((orientation == NW || orientation == SW) && (int)p.x == p.x) // WEST
 		p.x -= 1;
-	if ((orientation == NE || orientation == NW)  && (int)p.y == p.y) // NORTH
+	if ((orientation == NE || orientation == NW) && (int)p.y == p.y) // NORTH
 		p.y -= 1;
-	if (p.x < 0 || p.x >= display->map.width || p.y < 0 || p.y >= display->map.height)
+	if (p.x < 0 || p.x >= display->map.width || p.y < 0
+		|| p.y >= display->map.height)
 		return (true);
 	if (display->map.map[(int)(p.y)][(int)(p.x)] == '1')
 		return (true);
@@ -75,7 +76,7 @@ void	get_orientation(int *orientation, double angle)
 bool	orientation_is_N_or_S_or_E_or_W(int orientation)
 {
 	return (orientation == N || \
-	orientation == S || \
-	orientation == E || \
-	orientation == W);
+			orientation == S || \
+			orientation == E || \
+			orientation == W);
 }
