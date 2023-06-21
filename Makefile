@@ -62,7 +62,12 @@ SRC_EVENTS		=	${DIR_EVENTS}events.c			\
 # Display files
 SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c				\
 					${DIR_DISPLAY}render_frames.c				\
-					${DIR_DISPLAY}display_game.c \
+					${DIR_DISPLAY}display_game.c 				\
+					${DIR_DISPLAY}math/cardinal_formulas.c 		\
+					${DIR_DISPLAY}math/math_common.c 			\
+					${DIR_DISPLAY}raycasting/find_collision.c 			\
+					${DIR_DISPLAY}raycasting/raycasting_computation.c 	\
+					${DIR_DISPLAY}raycasting/raycasting_utils.c 		\
 					${DIR_DISPLAY}draw_tools/mlx_draw_square.c	\
 					${DIR_DISPLAY}draw_tools/mlx_draw_circle.c	\
 					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c	\

@@ -47,10 +47,11 @@ int	check_mousecode(int x, int y, t_display *display)
 		display->player.orientation -= 0.02;
 	else if (x > display->width / 2)
 		display->player.orientation += 0.02;
-	mlx_mouse_move(\
-		display->mlx, \
-		display->mlx_win, \
-		display->width / 2, \
-		display->height / 2);
+	if (OS_LINUX)
+		mlx_mouse_move(\
+	display->mlx, \
+	display->mlx_win, \
+	display->width / 2, \
+	display->height / 2);
 	return (0);
 }

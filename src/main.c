@@ -32,10 +32,12 @@ int	main(int argc, char **argv)
 		display.mlx, display.width, display.height, "Cub3D - 42");
 	mlx_hook(display.mlx_win, 2, 1L << 0, check_keycode, &display);
 	mlx_hook(display.mlx_win, 3, 1L << 1, check_keycode_up, &display);
-	mlx_hook(display.mlx_win, 6, 1L << 6, check_mousecode, &display);
+	if (OS_LINUX)
+		mlx_hook(display.mlx_win, 6, 1L << 6, check_mousecode, &display);
 	mlx_hook(display.mlx_win, 17, 0, quit_window, &display);
 	mlx_loop_hook(display.mlx, render_frames, &display);
-	mlx_mouse_hide(display.mlx, display.mlx_win);
+	if (OS_LINUX)
+		mlx_mouse_hide(display.mlx, display.mlx_win);
 	mlx_loop(display.mlx);
 	return (EXIT_SUCCESS);
 }

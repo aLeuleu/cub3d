@@ -149,6 +149,8 @@
 
 # define IMG_SIZE	64
 
+# define TWO_PI	2*M_PI
+
 // Point structure
 typedef struct s_p {
 	double		x;
@@ -330,5 +332,23 @@ void	init_player(t_display *display);
 
 //display game
 void	display_game(t_display *display);
+double	floor2(double n);
+t_p		closest_point(t_p start, t_p p1, t_p p2);
 
+//math formulas
+void north_formula(t_p *point, t_p *tmp);
+void south_formula(t_p *point, t_p *tmp);
+void east_formula(t_p *point, t_p *tmp);
+void west_formula(t_p *point, t_p *tmp);
+
+//raycasting
+void		compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, double angle);
+void		compute_cardinal_collision(t_p *point, t_display *display, int orientation);
+void		compute_y_points_untill_collision(t_p *point, const double *tan_angle, t_display *display, int orientation);
+void		compute_x_points_untill_collision(t_p *point, const double *tan_angle, t_display *display, int orientation);
+bool		check_collision(t_display *display, t_p p, int orientation);
+void		angle_routine(double angle, double *tan_angle, int orientation);
+void		adjust_angle(double *angle);
+void		get_orientation(int *orientation, double angle);
+bool		orientation_is_N_or_S_or_E_or_W(int orientation);
 #endif
