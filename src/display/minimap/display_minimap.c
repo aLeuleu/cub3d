@@ -27,7 +27,7 @@ static void	draw_player(t_display *display, int zoom)
 		pos.y = display->player.pos.y * zoom;
 	}
 	mlx_draw_circle_player(display, zoom / 2, \
-		display->player.orientation, 0x3d4839, pos);
+						   display->player.orientation, pos);
 }
 
 static void	minimap_style(t_display *display, int line, int column, t_p pos)

@@ -149,7 +149,7 @@
 
 # define IMG_SIZE	64
 
-# define TWO_PI	2*M_PI
+# define TWO_PI	6.28318530717958647692528676655900576
 
 // Point structure
 typedef struct s_p {
@@ -282,10 +282,14 @@ int			check_keycode(int keycode, t_display *display);
 int			check_keycode_up(int keycode, t_display *display);
 int			check_mousecode(int x, int y, t_display *display);
 int			player_movements(t_display *display);
-int			move_up(t_display *display, double *new_pos_x, double *new_pos_y);
-int			move_down(t_display *display, double *new_pos_x, double *new_pos_y);
-int			move_left(t_display *display, double *new_pos_x, double *new_pos_y);
-int			move_right(t_display *display, double *new_pos_x, double *new_pos_y);
+int			move_up(t_display *display, double *new_pos_x, \
+			double *new_pos_y);
+int			move_down(t_display *display, double *new_pos_x, \
+			double *new_pos_y);
+int			move_left(t_display *display, double *new_pos_x, \
+			double *new_pos_y);
+int			move_right(t_display *display, double *new_pos_x, \
+			double *new_pos_y);
 
 // utils
 t_p			init_point(int x, int y);
@@ -301,18 +305,20 @@ int			render_frames(t_display *display);
 
 // minimap
 void		display_minimap(t_display *display);
-void		my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color);
+void		my_mlx_pixel_put_minimap(t_display *display, int x, int y, \
+			int color);
 void		mlx_draw_square_minimap(\
 			t_display *display, int side_len, t_p pos, int color);
 void		mlx_draw_circle_minimap(\
 			t_display *display, int radius, t_p pos, int color);
 void		mlx_draw_circle_player(t_display *display, int radius, \
-			double orientation, int color, t_p pos);
+			double orientation, t_p pos);
 double		offset_minimap(t_display *display, double point, double offset);
 int			draw_frame_minimap(t_display *display);
 
 // textures
-bool		display_textures(t_display *display, t_p w_up, t_p w_down, t_p p_col);
+bool		display_textures(t_display *display, t_p w_up, t_p w_down, \
+			t_p p_col);
 
 // draw_tools
 void		my_mlx_pixel_put(t_display *display, int x, int y, int color);
@@ -336,10 +342,14 @@ void		east_formula(t_p *point, t_p *tmp);
 void		west_formula(t_p *point, t_p *tmp);
 
 //raycasting
-void		compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, double angle);
-void		compute_cardinal_collision(t_p *point, t_display *display, int orientation);
-void		compute_y_points_untill_collision(t_p *point, const double *tan_angle, t_display *display, int orientation);
-void		compute_x_points_untill_collision(t_p *point, const double *tan_angle, t_display *display, int orientation);
+void		compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, \
+			double angle);
+void		compute_cardinal_collision(t_p *point, t_display *display, \
+			int orientation);
+void		compute_y_points_untill_collision(t_p *point, const double *tan_angle, \
+			t_display *display, int orientation);
+void		compute_x_points_untill_collision(t_p *point, const double *tan_angle, \
+			t_display *display, int orientation);
 bool		check_collision(t_display *display, t_p p, int orientation);
 void		angle_routine(double angle, double *tan_angle, int orientation);
 void		adjust_angle(double *angle);

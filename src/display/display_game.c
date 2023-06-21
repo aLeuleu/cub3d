@@ -24,7 +24,6 @@ void	display_game(t_display *display)
 	t_p				start_pos;
 	t_p				p_collision;
 	double			angle;
-	const double	one_on_width = 2 / ((double)display->width);
 
 	count = 0;
 	i = -1;
@@ -35,12 +34,11 @@ void	display_game(t_display *display)
 		adjust_angle(&angle);
 		p_collision = start_pos;
 		find_collision(display, &start_pos, &p_collision, angle);
-		display->ray_len = sqrt(pow(p_collision.x - display->player.pos.x, 2)
-				+ pow(p_collision.y - display->player.pos.y, 2));
-		compute_walls_and_display_texture(display, angle, count,
-				&p_collision);
-		i += one_on_width;
-		count++;
+		display->ray_len = sqrt(pow(p_collision.x - display->player.pos.x, 2) \
+		+ pow(p_collision.y - display->player.pos.y, 2));
+		compute_walls_and_display_texture(display, angle, count++, \
+		&p_collision);
+		i += 2 / ((double)display->width);
 	}
 }
 

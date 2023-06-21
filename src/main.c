@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void mlx_hooks(t_display *display);
+static void	mlx_hooks(t_display *display);
 
 int	main(int argc, char **argv)
 {
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-static void mlx_hooks(t_display *display)
+static void	mlx_hooks(t_display *display)
 {
 	mlx_hook((*display).mlx_win, 2, 1L << 0, check_keycode, display);
 	mlx_hook((*display).mlx_win, 3, 1L << 1, check_keycode_up, display);

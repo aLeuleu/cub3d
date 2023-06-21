@@ -64,18 +64,17 @@ void	mlx_draw_circle_minimap(t_display *display, int radius, \
 	}
 }
 
-void	mlx_draw_circle_player(t_display *display, int radius, \
-			double orientation, int color, t_p pos)
+void mlx_draw_circle_player(t_display *display, int radius, double orientation, t_p pos)
 {
 	t_p	a;
 	t_p	b;
 
-	mlx_draw_circle_minimap(display, radius, pos, color);
+	mlx_draw_circle_minimap(display, radius, pos, 0x3d4839);
 	a.x = pos.x;
 	a.y = pos.y;
 	b.x = pos.x + cos(orientation) * radius * 2;
 	b.y = pos.y + sin(orientation) * radius * 2;
-	mlx_draw_line(display, a, b, color);
+	mlx_draw_line(display, a, b, 0x3d4839);
 }
 
 double	offset_minimap(t_display *display, double point, double offset)
