@@ -43,7 +43,7 @@ void	compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display,
 
 	get_orientation(&orientation, angle);
 	angle_routine(angle, &tan_angle, orientation);
-	if (orientation_is_N_or_S_or_E_or_W(orientation))
+	if (orientation_is_cardinal(orientation))
 	{
 		compute_cardinal_collision(ix, display, orientation);
 		iy = ix;

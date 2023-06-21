@@ -12,14 +12,13 @@
 
 #include "cub3d.h"
 
-void	compute_walls_and_display_texture(t_display *display, double lin_len,
+void	compute_walls_and_display_texture(t_display *display, double angle,
 			int count, t_p *p_collision);
 bool	find_collision(t_display *display, t_p *start, t_p *p_collision,
 			double angle);
 
 void	display_game(t_display *display)
 {
-	double			lin_len;
 	int				count;
 	double			i;
 	t_p				start_pos;
@@ -38,21 +37,21 @@ void	display_game(t_display *display)
 		find_collision(display, &start_pos, &p_collision, angle);
 		display->ray_len = sqrt(pow(p_collision.x - display->player.pos.x, 2)
 				+ pow(p_collision.y - display->player.pos.y, 2));
-		lin_len = display->ray_len * cos(angle - display->player.orientation);
-		compute_walls_and_display_texture(display, lin_len, count,
+		compute_walls_and_display_texture(display, angle, count,
 				&p_collision);
 		i += one_on_width;
 		count++;
 	}
 }
 
-void	compute_walls_and_display_texture(t_display *display, double lin_len,
+void	compute_walls_and_display_texture(t_display *display, double angle,
 		int count, t_p *p_collision)
 {
 	t_p				wall_up;
 	t_p				wall_down;
 	const double	half_height = (double)display->height / 2;
-	const double	wall_height = (double)display->height / lin_len;
+	const double	wall_height = (double)display->height / \
+	(display->ray_len * cos(angle - display->player.orientation));
 
 	if (display->ray_len < 0.1)
 		display->ray_len = 0.1;

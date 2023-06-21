@@ -37,9 +37,9 @@ void	angle_routine(double angle, double *tan_angle, int orientation)
 
 bool	check_collision(t_display *display, t_p p, int orientation)
 {
-	if ((orientation == NW || orientation == SW) && (int)p.x == p.x) // WEST
+	if ((orientation == NW || orientation == SW) && (int)p.x == p.x)
 		p.x -= 1;
-	if ((orientation == NE || orientation == NW) && (int)p.y == p.y) // NORTH
+	if ((orientation == NE || orientation == NW) && (int)p.y == p.y)
 		p.y -= 1;
 	if (p.x < 0 || p.x >= display->map.width || p.y < 0
 		|| p.y >= display->map.height)
@@ -67,11 +67,9 @@ void	get_orientation(int *orientation, double angle)
 		*orientation = W;
 	else if (angle == 3 * M_PI_2)
 		*orientation = N;
-	else
-		printf("ERROR\n");
 }
 
-bool	orientation_is_N_or_S_or_E_or_W(int orientation)
+bool	orientation_is_cardinal(int orientation)
 {
 	return (orientation == N || \
 			orientation == S || \

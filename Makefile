@@ -68,7 +68,6 @@ SRC_DISPLAY		=	${DIR_DISPLAY}load_textures.c				\
 					${DIR_DISPLAY}raycasting/find_collision.c 			\
 					${DIR_DISPLAY}raycasting/raycasting_computation.c 	\
 					${DIR_DISPLAY}raycasting/raycasting_utils.c 		\
-					${DIR_DISPLAY}draw_tools/mlx_draw_square.c	\
 					${DIR_DISPLAY}draw_tools/mlx_draw_circle.c	\
 					${DIR_DISPLAY}draw_tools/mlx_draw_pixel.c	\
 					${DIR_DISPLAY}draw_tools/mlx_draw_line.c	\

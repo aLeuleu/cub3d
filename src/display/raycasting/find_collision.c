@@ -12,18 +12,24 @@
 
 #include "cub3d.h"
 
+static bool is_out_of_bonds(const t_display *display, t_p *p);
+
+static bool is_out_of_bonds(const t_display *display, t_p *p)
+{
+	return (*p).x < 0 || (*p).x >= display->map.width || (*p).y < 0
+		   || (*p).y >= display->map.height;
+}
+
 bool	find_collision(t_display *display, t_p *start, t_p *p_collision,
-		double angle)
+			   double angle)
 {
 	t_p	ix;
 	t_p	iy;
 
 	compute_points_untill_collision(&ix, &iy, display, angle);
-	if (ix.x < 0 || ix.x >= display->map.width || ix.y < 0
-		|| ix.y >= display->map.height)
+	if (is_out_of_bonds(display, &ix))
 		ix.collision = false;
-	if (iy.x < 0 || iy.x >= display->map.width || iy.y < 0
-		|| iy.y >= display->map.height)
+	if (is_out_of_bonds(display, &iy))
 		iy.collision = false;
 	if (ix.collision && iy.collision)
 		*p_collision = closest_point(*start, ix, iy);
@@ -33,10 +39,7 @@ bool	find_collision(t_display *display, t_p *start, t_p *p_collision,
 		*p_collision = iy;
 	if (ix.collision || iy.collision)
 		return (true);
-	if ((ix.x < 0 || ix.x >= display->map.width || ix.y < 0
-			|| ix.y >= display->map.height) && (iy.x < 0
-			|| iy.x >= display->map.width || iy.y < 0
-			|| iy.y >= display->map.height))
+	if (is_out_of_bonds(display, &ix) && is_out_of_bonds(display, &iy))
 	{
 		*p_collision = closest_point(*start, ix, iy);
 		return (true);

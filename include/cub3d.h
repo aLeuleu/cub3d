@@ -209,7 +209,7 @@ typedef struct s_p_list
 	t_list	*next;
 }	t_p_list;
 
-//making an enum for NORTH SOUTH EAST WEST
+//enum for orientation
 enum e_direction {
 	N = 0,
 	S = 1,
@@ -257,89 +257,83 @@ enum e_map_events {
 };
 
 // main.c
-int		main(int argc, char **argv);
+int			main(int argc, char **argv);
 
 // init.c
-int		init_display_struct(t_display *display);
-int		init_map_struct(t_map *map);
-void	init_player(t_display *display);
+int			init_display_struct(t_display *display);
+int			init_map_struct(t_map *map);
+void		init_player(t_display *display);
 
 // parsing
-int		parsing(int argc, char **argv, t_display *display);
-int		check_file_extention(char *file);
-int		get_textures_colors(int fd, t_map *map);
-void	get_player_position(t_display *display);
-int		get_map(int fd, t_map *map);
-int		map_is_formated(t_map *map);
-int		create_trgb(int t, int r, int g, int b);
-int		load_colors(t_map *map);
+int			parsing(int argc, char **argv, t_display *display);
+int			check_file_extention(char *file);
+int			get_textures_colors(int fd, t_map *map);
+void		get_player_position(t_display *display);
+int			get_map(int fd, t_map *map);
+int			map_is_formated(t_map *map);
+int			create_trgb(int t, int r, int g, int b);
+int			load_colors(t_map *map);
 
 // events
-int		quit_window(t_display *display);
-int		display_coo_player(t_display *display);
-int		display_debug(t_display *display);
-int		check_minimap_opening(t_display *display);
-void	init_map_image(t_display *display);
-int		check_keycode(int keycode, t_display *display);
-int		check_keycode_up(int keycode, t_display *display);
-int		check_mousecode(int x, int y, t_display *display);
-int		player_movements(t_display *display);
-int		move_up(t_display *display, double *new_pos_x, double *new_pos_y);
-int		move_down(t_display *display, double *new_pos_x, double *new_pos_y);
-int		move_left(t_display *display, double *new_pos_x, double *new_pos_y);
-int		move_right(t_display *display, double *new_pos_x, double *new_pos_y);
+int			quit_window(t_display *display);
+int			check_minimap_opening(t_display *display);
+void		init_map_image(t_display *display);
+int			check_keycode(int keycode, t_display *display);
+int			check_keycode_up(int keycode, t_display *display);
+int			check_mousecode(int x, int y, t_display *display);
+int			player_movements(t_display *display);
+int			move_up(t_display *display, double *new_pos_x, double *new_pos_y);
+int			move_down(t_display *display, double *new_pos_x, double *new_pos_y);
+int			move_left(t_display *display, double *new_pos_x, double *new_pos_y);
+int			move_right(t_display *display, double *new_pos_x, double *new_pos_y);
 
 // utils
-t_p		init_point(int x, int y);
-void	error(char *str);
-void	bad_format_line(int idx);
-void	bad_format_tab(char *text, int line, int column);
-void	free_map(t_map *map);
-void	free_images(t_display *display);
+t_p			init_point(int x, int y);
+void		error(char *str);
+void		bad_format_line(int idx);
+void		bad_format_tab(char *text, int line, int column);
+void		free_map(t_map *map);
+void		free_images(t_display *display);
 
 // display
-int		load_textures(void *mlx, t_map *map);
-int		render_frames(t_display *display);
+int			load_textures(void *mlx, t_map *map);
+int			render_frames(t_display *display);
 
 // minimap
-void	display_minimap(t_display *display);
-void	my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color);
-void	mlx_draw_square_minimap(\
+void		display_minimap(t_display *display);
+void		my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color);
+void		mlx_draw_square_minimap(\
 			t_display *display, int side_len, t_p pos, int color);
-void	mlx_draw_circle_minimap(\
+void		mlx_draw_circle_minimap(\
 			t_display *display, int radius, t_p pos, int color);
-void	mlx_draw_circle_player(t_display *display, int radius, \
+void		mlx_draw_circle_player(t_display *display, int radius, \
 			double orientation, int color, t_p pos);
-double	offset_minimap(t_display *display, double point, double offset);
-int		draw_frame_minimap(t_display *display);
+double		offset_minimap(t_display *display, double point, double offset);
+int			draw_frame_minimap(t_display *display);
 
 // textures
-bool	display_textures(t_display *display, t_p w_up, t_p w_down, t_p p_col);
+bool		display_textures(t_display *display, t_p w_up, t_p w_down, t_p p_col);
 
 // draw_tools
-void	my_mlx_pixel_put(t_display *display, int x, int y, int color);
-void	mlx_draw_square(t_display *display, int side_len, t_p pos, int color);
-void	mlx_draw_circle(t_display *display, int radius, t_p pos, int color);
-void	mlx_draw_circle_oriented(t_display *display, int radius, \
-			double orientation, int color, t_p pos);
-size_t	ft_max(size_t a, size_t b);
-void	mlx_draw_line(t_display *display, t_p a, t_p b, int color);
-void	mlx_draw_vertical_lines(t_display *display, \
+void		my_mlx_pixel_put(t_display *display, int x, int y, int color);
+size_t		ft_max(size_t a, size_t b);
+void		mlx_draw_line(t_display *display, t_p a, t_p b, int color);
+void		mlx_draw_vertical_lines(t_display *display, \
 			t_p up, t_p down, int color);
 
 // player behavior
-void	init_player(t_display *display);
+void		init_player(t_display *display);
 
 //display game
-void	display_game(t_display *display);
-double	floor2(double n);
-t_p		closest_point(t_p start, t_p p1, t_p p2);
+void		display_game(t_display *display);
+double		floor2(double n);
+t_p			closest_point(t_p start, t_p p1, t_p p2);
 
 //math formulas
-void north_formula(t_p *point, t_p *tmp);
-void south_formula(t_p *point, t_p *tmp);
-void east_formula(t_p *point, t_p *tmp);
-void west_formula(t_p *point, t_p *tmp);
+void		north_formula(t_p *point, t_p *tmp);
+void		south_formula(t_p *point, t_p *tmp);
+void		east_formula(t_p *point, t_p *tmp);
+void		west_formula(t_p *point, t_p *tmp);
 
 //raycasting
 void		compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, double angle);
@@ -350,5 +344,5 @@ bool		check_collision(t_display *display, t_p p, int orientation);
 void		angle_routine(double angle, double *tan_angle, int orientation);
 void		adjust_angle(double *angle);
 void		get_orientation(int *orientation, double angle);
-bool		orientation_is_N_or_S_or_E_or_W(int orientation);
+bool		orientation_is_cardinal(int orientation);
 #endif
