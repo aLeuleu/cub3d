@@ -342,14 +342,14 @@ void		east_formula(t_p *point, t_p *tmp);
 void		west_formula(t_p *point, t_p *tmp);
 
 //raycasting
-void		compute_points_untill_collision(t_p *ix, t_p *iy, t_display *display, \
-			double angle);
+void		compute_points_untill_collision(t_p *ix, t_p *iy, \
+			t_display *display, double angle);
 void		compute_cardinal_collision(t_p *point, t_display *display, \
 			int orientation);
-void		compute_y_points_untill_collision(t_p *point, const double *tan_angle, \
-			t_display *display, int orientation);
-void		compute_x_points_untill_collision(t_p *point, const double *tan_angle, \
-			t_display *display, int orientation);
+void		compute_y_points_untill_collision(t_p *point, \
+const double *tan_angle, t_display *display, int orientation);
+void		compute_x_points_untill_collision(t_p *point, \
+const double *tan_angle, t_display *display, int orientation);
 bool		check_collision(t_display *display, t_p p, int orientation);
 void		angle_routine(double angle, double *tan_angle, int orientation);
 void		adjust_angle(double *angle);

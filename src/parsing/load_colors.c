@@ -45,9 +45,11 @@ static int	create_color_value(char **tab)
 	value2 = ft_strtrim(tab[1], " \t\n");
 	value3 = ft_strtrim(tab[2], " \t\n");
 	if (OS_LINUX)
-		color = create_trgb(255, ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+		color = create_trgb(255, ft_atoi(tab[0]), \
+		ft_atoi(tab[1]), ft_atoi(tab[2]));
 	else
-		color = create_trgb(0, ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+		color = create_trgb(0, ft_atoi(tab[0]), \
+		ft_atoi(tab[1]), ft_atoi(tab[2]));
 	free(value1);
 	free(value2);
 	free(value3);

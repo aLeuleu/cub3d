@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-static bool is_out_of_bonds(const t_display *display, t_p *p);
+static bool	is_out_of_bonds(const t_display *display, t_p *p);
 
-static bool is_out_of_bonds(const t_display *display, t_p *p)
+static bool	is_out_of_bonds(const t_display *display, t_p *p)
 {
-	return (*p).x < 0 || (*p).x >= display->map.width || (*p).y < 0
-		   || (*p).y >= display->map.height;
+	return ((*p).x < 0 || (*p).x >= display->map.width || (*p).y < 0 \
+	|| (*p).y >= display->map.height);
 }
 
-bool	find_collision(t_display *display, t_p *start, t_p *p_collision,
-			   double angle)
+bool	find_collision(t_display *display, t_p *start, t_p *p_collision, \
+		double angle)
 {
 	t_p	ix;
 	t_p	iy;

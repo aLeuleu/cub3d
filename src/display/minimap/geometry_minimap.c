@@ -64,7 +64,8 @@ void	mlx_draw_circle_minimap(t_display *display, int radius, \
 	}
 }
 
-void mlx_draw_circle_player(t_display *display, int radius, double orientation, t_p pos)
+void	mlx_draw_circle_player(t_display *display, int radius, \
+double orientation, t_p pos)
 {
 	t_p	a;
 	t_p	b;
