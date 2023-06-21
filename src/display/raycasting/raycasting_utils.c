@@ -30,8 +30,6 @@ void	angle_routine(double angle, double *tan_angle, int orientation)
 		angle = angle - M_PI;
 	else if (orientation == SE)
 		angle = 2 * M_PI - angle;
-	if (angle < 0 || angle > M_PI / 2)
-		printf("ERROR\n");
 	*tan_angle = tan(angle);
 	if (*tan_angle < 0)
 		*tan_angle *= -1;

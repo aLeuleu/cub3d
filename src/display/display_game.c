@@ -25,10 +25,9 @@ void	display_game(t_display *display)
 	t_p				start_pos;
 	t_p				p_collision;
 	double			angle;
-	const double	one_on_width;
+	const double	one_on_width = 2 / ((double)display->width);
 
 	count = 0;
-	one_on_width = 2 / ((double)display->width);
 	i = -1;
 	while (i <= 1)
 	{
@@ -52,11 +51,9 @@ void	compute_walls_and_display_texture(t_display *display, double lin_len,
 {
 	t_p				wall_up;
 	t_p				wall_down;
-	const double	half_height;
-	const double	wall_height;
+	const double	half_height = (double)display->height / 2;
+	const double	wall_height = (double)display->height / lin_len;
 
-	half_height = (double)display->height / 2;
-	wall_height = (double)display->height / lin_len;
 	if (display->ray_len < 0.1)
 		display->ray_len = 0.1;
 	wall_up.x = count;
