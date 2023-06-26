@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:24:44 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/20 17:08:48 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/26 13:30:40 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static int	create_color_value(char **tab)
 	value2 = ft_strtrim(tab[1], " \t\n");
 	value3 = ft_strtrim(tab[2], " \t\n");
 	if (OS_LINUX)
-		color = create_trgb(255, ft_atoi(tab[0]), \
-		ft_atoi(tab[1]), ft_atoi(tab[2]));
+		color = create_trgb(255, ft_atoi(value1), \
+		ft_atoi(value2), ft_atoi(value3));
 	else
-		color = create_trgb(0, ft_atoi(tab[0]), \
-		ft_atoi(tab[1]), ft_atoi(tab[2]));
+		color = create_trgb(0, ft_atoi(value1), \
+		ft_atoi(value2), ft_atoi(value3));
 	free(value1);
 	free(value2);
 	free(value3);
