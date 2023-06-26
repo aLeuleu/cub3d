@@ -6,11 +6,28 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:24:44 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/26 13:30:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/26 13:50:01 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	nb_separator_is_right(char *str)
+{
+	int	idx;
+	int	number;
+
+	idx = -1;
+	number = 0;
+	while (str[++idx])
+	{
+		if (str[idx] == ',')
+			number++;
+	}
+	if (number == 2)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
 
 static int	is_valid_values(char **tab)
 {
@@ -68,9 +85,14 @@ int	load_colors(t_map *map)
 
 	if (!map->color_f_raw || !map->color_c_raw)
 		return (error("The colors provided are not valid"), EXIT_FAILURE);
+	if (nb_separator_is_right(map->color_f_raw) == EXIT_FAILURE)
+		return (error("The color F has too many separators"), EXIT_FAILURE);
 	tab_color_f = ft_split(map->color_f_raw, ',');
 	if (is_valid_values(tab_color_f) == EXIT_FAILURE)
 		return (error("Color F is incorrectly formatted"), EXIT_FAILURE);
+	if (nb_separator_is_right(map->color_c_raw) == EXIT_FAILURE)
+		return (error("The color C has too many separators"), \
+		ft_free_tab(tab_color_f), EXIT_FAILURE);
 	tab_color_c = ft_split(map->color_c_raw, ',');
 	if (is_valid_values(tab_color_c) == EXIT_FAILURE)
 	{
