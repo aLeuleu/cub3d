@@ -334,6 +334,8 @@ void		init_player(t_display *display);
 void		display_game(t_display *display);
 double		floor2(double n);
 t_p			closest_point(t_p start, t_p p1, t_p p2);
+bool		find_collision(t_display *display, t_p *start, t_p *p_collision, \
+				double angle);
 
 //math formulas
 void		north_formula(t_p *point, t_p *tmp);

@@ -12,10 +12,8 @@
 
 #include "cub3d.h"
 
-void	compute_walls_and_display_texture(t_display *display, double angle,
-			int count, t_p *p_collision);
-bool	find_collision(t_display *display, t_p *start, t_p *p_collision,
-			double angle);
+static void	compute_walls_and_display_texture(t_display *display, double angle, \
+				int count, t_p *p_collision);
 
 void	display_game(t_display *display)
 {
