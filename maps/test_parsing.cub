@@ -1,12 +1,12 @@
 
 C    154,  207,241    
-NO        ./textures/NO.xpm   
+NO        ./textures/NO2.xpm   
 
-SO ./textures/SO.xpm
+SO ./textures/SO2.xpm
 F 45, 77,        99       
 
-EA    ./textures/EA.xpm
-WE ./textures/WE.xpm
+EA    ./textures/EA2.xpm
+WE ./textures/WE2.xpm
 11111
 10001    
 10S01
