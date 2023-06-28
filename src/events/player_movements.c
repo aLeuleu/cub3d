@@ -12,12 +12,18 @@
 
 #include "cub3d.h"
 
+static void	recenter_player_pos(t_display *display, double pos_x, double pos_y)
+{
+	display->player.pos.x = (int)pos_x + 0.5;
+	display->player.pos.y = (int)pos_y + 0.5;
+}
+
 static int check_wall(t_display *display, double pos_x, double pos_y)
 {
 	t_p	a;
 
 	if (display->player.closest_wall < 0.3)
-		return (EXIT_FAILURE);
+		return (recenter_player_pos(display, pos_x, pos_y), EXIT_FAILURE);
 	a.x = (pos_x);
 	a.y = (pos_y);
 	if (a.x > display->player.pos.x)

@@ -43,7 +43,7 @@ void	display_game(t_display *display)
 	}
 }
 
-void record_closest_wall(t_display *display)
+void	record_closest_wall(t_display *display)
 {
 	if (display->ray_len < display->player.closest_wall)
 		display->player.closest_wall = display->ray_len;
