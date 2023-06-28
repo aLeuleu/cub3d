@@ -21,5 +21,7 @@ void	my_mlx_pixel_put(t_display *display, int x, int y, int color)
 	dst = display->img.addr \
 	+ (y * display->img.line_length \
 	+ x * (display->img.bits_per_pixel / 8));
+	if (OS_LINUX == false)
+		color &= 0x00FFFFFF;
 	*(unsigned int *)dst = color;
 }

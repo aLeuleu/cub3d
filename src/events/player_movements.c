@@ -12,52 +12,29 @@
 
 #include "cub3d.h"
 
-static int	check_wall_diag(t_display *display, double pos_x, double pos_y)
-{
-	t_p	a;
-	int	orient;
-
-	a.x = (pos_x);
-	a.y = (pos_y);
-	get_orientation(&orient, display->player.orientation);
-	if (orient == NW || orient == N || orient == W)
-	{
-		if (display->map.map[(int)(a.y) - 1][(int)(a.x)] == '1' \
-		&& display->map.map[(int)(a.y)][(int)(a.x) - 1] == '1' \
-		&& ((pos_x - (int)pos_x) < 0.5 || (pos_y - (int)pos_y < 0.5)))
-		{
-			if ((pos_x - (int)pos_x) < 0.5)
-				printf("pos x < 0.5 !\n");
-			if ((pos_y - (int)pos_y) < 0.5)
-				printf("pos_y < 0.5 !\n");
-			printf("pos_x : %f\npos_y : %f\n\n", pos_x, pos_y);
-			return (EXIT_FAILURE);
-		}
-	}
-	return (EXIT_SUCCESS);
-}
-
-static int	check_wall(t_display *display, double pos_x, double pos_y)
+static int check_wall(t_display *display, double pos_x, double pos_y)
 {
 	t_p	a;
 
+	if (display->player.closest_wall < 0.3)
+		return (EXIT_FAILURE);
 	a.x = (pos_x);
 	a.y = (pos_y);
 	if (a.x > display->player.pos.x)
-		a.x += 0.15;
+		a.x += 0.3;
 	else
-		a.x -= 0.15;
+		a.x -= 0.3;
 	if (a.y > display->player.pos.y)
-		a.y += 0.15;
+		a.y += 0.3;
 	else
-		a.y -= 0.15;
+		a.y -= 0.3;
 	if ((int)(a.y) >= display->map.height || (int)(a.x) >= display->map.width \
 	|| (int)(a.y) <= 0 || (int)(a.x) <= 0)
 		return (EXIT_FAILURE);
 	if (display->map.map[(int)(a.y)][(int)(a.x)] == '1' \
 	|| display->map.map[(int)(a.y)][(int)(a.x)] == ' ')
 		return (EXIT_FAILURE);
-	return (check_wall_diag(display, pos_x, pos_y));
+	return (EXIT_SUCCESS);
 }
 
 int	player_movements(t_display *display)

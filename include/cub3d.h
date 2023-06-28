@@ -155,7 +155,6 @@
 typedef struct s_p {
 	double		x;
 	double		y;
-	int			color;
 	bool		collision;
 }				t_p;
 
@@ -196,11 +195,8 @@ typedef struct s_player
 	t_p		pos;
 	double	orientation;
 	double	fov;
+	double	closest_wall;
 	double	speed;
-	int		score;
-	int		life;
-	int		max_life;
-	int		score_to_win;
 }	t_player;
 
 typedef struct s_p_list

@@ -14,6 +14,7 @@
 
 static void	compute_walls_and_display_texture(t_display *display, double angle, \
 				int count, t_p *p_collision);
+static void	record_closest_wall(t_display *display);
 
 void	display_game(t_display *display)
 {
@@ -25,6 +26,7 @@ void	display_game(t_display *display)
 
 	count = 0;
 	i = -1;
+	display->player.closest_wall = 3;
 	while (i <= 1)
 	{
 		start_pos = display->player.pos;
@@ -34,10 +36,17 @@ void	display_game(t_display *display)
 		find_collision(display, &start_pos, &p_collision, angle);
 		display->ray_len = sqrt(pow(p_collision.x - display->player.pos.x, 2) \
 		+ pow(p_collision.y - display->player.pos.y, 2));
+		record_closest_wall(display);
 		compute_walls_and_display_texture(display, angle, count++, \
 		&p_collision);
 		i += 2 / ((double)display->width);
 	}
+}
+
+void record_closest_wall(t_display *display)
+{
+	if (display->ray_len < display->player.closest_wall)
+		display->player.closest_wall = display->ray_len;
 }
 
 void	compute_walls_and_display_texture(t_display *display, double angle,
