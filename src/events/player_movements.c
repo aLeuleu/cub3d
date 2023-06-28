@@ -6,39 +6,32 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:56:09 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/19 14:12:09 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/06/28 18:45:10 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	recenter_player_pos(t_display *display, double pos_x, double pos_y)
+static int	check_wall(t_display *display, double new_pos_x, double new_pos_y)
 {
-	display->player.pos.x = (int)pos_x + 0.5;
-	display->player.pos.y = (int)pos_y + 0.5;
-}
+	double	gap;
+	double	pos_x;
+	double	pos_y;
 
-static int check_wall(t_display *display, double pos_x, double pos_y)
-{
-	t_p	a;
-
-	if (display->player.closest_wall < 0.3)
-		return (recenter_player_pos(display, pos_x, pos_y), EXIT_FAILURE);
-	a.x = (pos_x);
-	a.y = (pos_y);
-	if (a.x > display->player.pos.x)
-		a.x += 0.3;
-	else
-		a.x -= 0.3;
-	if (a.y > display->player.pos.y)
-		a.y += 0.3;
-	else
-		a.y -= 0.3;
-	if ((int)(a.y) >= display->map.height || (int)(a.x) >= display->map.width \
-	|| (int)(a.y) <= 0 || (int)(a.x) <= 0)
+	gap = 0.3;
+	pos_x = display->player.pos.x;
+	pos_y = display->player.pos.y;
+	if (pos_x < new_pos_x \
+	&& display->map.map[(int)(new_pos_y)][(int)(pos_x + gap)] == '1')
 		return (EXIT_FAILURE);
-	if (display->map.map[(int)(a.y)][(int)(a.x)] == '1' \
-	|| display->map.map[(int)(a.y)][(int)(a.x)] == ' ')
+	else if (pos_x > new_pos_x \
+	&& display->map.map[(int)(new_pos_y)][(int)(pos_x - gap)] == '1')
+		return (EXIT_FAILURE);
+	if (pos_y < new_pos_y \
+	&& display->map.map[(int)(pos_y + gap)][(int)(new_pos_x)] == '1')
+		return (EXIT_FAILURE);
+	else if (pos_y > new_pos_y \
+	&& display->map.map[(int)(pos_y - gap)][(int)(new_pos_x)] == '1')
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
