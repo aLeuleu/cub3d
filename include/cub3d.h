@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/07/01 18:01:27 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 18:38:17 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ enum e_map_events {
 };
 
 // main.c
-int			main(int argc, char **argv);
+int			main(int argc, char **argv, char **envp);
 
 // init.c
 int			init_display_struct(t_display *display);

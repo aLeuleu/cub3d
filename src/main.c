@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/21 17:04:25 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/07/01 18:39:23 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static void	mlx_hooks(t_display *display);
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_display	display;
 
+	if (!envp[0])
+		return (printf("Environment not found.\n"), EXIT_FAILURE);
 	if (init_display_struct(&display) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	init_map_struct(&display.map);
