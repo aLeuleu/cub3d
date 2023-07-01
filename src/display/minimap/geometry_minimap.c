@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 08:55:24 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/19 14:27:01 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 12:17:26 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	my_mlx_pixel_put_minimap(t_display *display, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x < 0 || y < 0 || x >= display->width || y >= display->height)
+		return ;
 	if (x < 0 || y < 0 || x >= display->size_minimap \
 	|| y >= display->size_minimap)
 		return ;
