@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:27:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/19 14:14:08 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 12:12:31 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ bool	display_textures(t_display *display, t_p w_up, t_p w_down, t_p p_col)
 	double			tmp;
 
 	i = 0;
+	x_color = 0;
 	while (i < w_down.y - w_up.y)
 	{
 		if (w_up.y + i < 0 || w_up.y + i >= display->height)
