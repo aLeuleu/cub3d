@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:27:29 by lpupier           #+#    #+#             */
-/*   Updated: 2023/07/01 12:12:31 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 12:14:20 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,9 @@ bool	display_textures(t_display *display, t_p w_up, t_p w_down, t_p p_col)
 			i++;
 			continue ;
 		}
+		tmp = p_col.x;
 		if (p_col.x == (int)p_col.x)
 			tmp = p_col.y;
-		else
-			tmp = p_col.x;
 		y_color = i * IMG_SIZE / (w_down.y - w_up.y);
 		color = ft_get_color(\
 			get_right_texture(display, p_col, tmp, &x_color), x_color, y_color);
