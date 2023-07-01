@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:12:51 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/28 14:08:55 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 18:29:51 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	init_map_struct(t_map *map)
 void	init_player(t_display *display)
 {
 	display->player.fov = 60;
+	display->player.pov_vertical = 0;
 	display->player.speed = 0.1;
 }

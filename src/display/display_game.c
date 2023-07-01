@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:03:13 by alevra            #+#    #+#             */
-/*   Updated: 2023/06/21 17:04:47 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/07/01 18:32:44 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void	compute_walls_and_display_texture(t_display *display, double angle,
 	wall_up.y = half_height - (double)wall_height / 2;
 	wall_down.x = wall_up.x;
 	wall_down.y = half_height + (double)wall_height / 2;
+	wall_up.y += display->player.pov_vertical;
+	wall_down.y += display->player.pov_vertical;
 	display_textures(display, wall_up, wall_down, (*p_collision));
 }

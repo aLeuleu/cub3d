@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:31:49 by lpupier           #+#    #+#             */
-/*   Updated: 2023/07/01 12:17:08 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 18:01:27 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct s_player
 {
 	t_p		pos;
 	double	orientation;
+	double	pov_vertical;
 	double	fov;
 	double	closest_wall;
 	double	speed;

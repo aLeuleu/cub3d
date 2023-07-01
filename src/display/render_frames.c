@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:17:43 by lpupier           #+#    #+#             */
-/*   Updated: 2023/06/19 14:46:34 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/07/01 18:31:54 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_half_upper(t_display *display, int color)
 	x = 0;
 	while (x < display->width)
 	{
-		while (y < display->height / 2)
+		while (y < display->height / 2 + display->player.pov_vertical)
 		{
 			my_mlx_pixel_put(display, x, y, color);
 			y++;
@@ -59,9 +59,10 @@ void	draw_half_down(t_display *display, int color)
 	x = 0;
 	while (x < display->width)
 	{
-		while (y < display->height)
+		while (y + display->player.pov_vertical < display->height)
 		{
-			my_mlx_pixel_put(display, x, y, color);
+			my_mlx_pixel_put(display, x, \
+			y + display->player.pov_vertical, color);
 			y++;
 		}
 		y = display->height / 2;
